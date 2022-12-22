@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RestController
 public class JsglController {
-    @RequestMapping(value="users/login",method= RequestMethod.POST)
+    @RequestMapping(value="users/login",method = RequestMethod.POST)
     public Map<String,Object> test(){
         Map<String,Object> outmap = new TreeMap<String,Object>();
         outmap.put("state",200);
