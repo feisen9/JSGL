@@ -15,7 +15,10 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="SQLMapper/DeptMapper.xml"/>
-        <mapper resource="SQLMapper/StudentMapper.xml"/>
+<!--        <mapper resource="com/hhu20/jsgl/mapper/DeptMapper.xml"/>-->
+<!--        <mapper resource="com/hhu20/jsgl/mapper/StudentMapper.xml"/>-->
+
+<!--        包扫描方式映射-->
+        <package name="com.hhu20.jsgl.mapper"/>
     </mappers>
 </configuration>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 -->
+<mapper namespace="com.hhu20.jsgl.mapper.StudentMapper">
+    <select id="selectAll" resultType="com.hhu20.jsgl.pojo.Student">
+        select * from Student;
+    </select>
+    <select id="selectSNO" resultType="com.hhu20.jsgl.pojo.Student">
+        select * from Student where sno like #{sno};
+    </select>
+    <select id="selectByCondition" resultType="com.hhu20.jsgl.pojo.Student">
+        select *
+        from Student
+        where 1=1
+            <if test="sno != null and sno != ''">
+                and SNO like #{sno}
+            </if>
+            <if test="mno != null and mno != ''">
+                and MNO like #{mno}
+            </if>
+            <if test="sname != null and sname != ''">
+                and SNAME like #{sname}
+            </if>
+            <if test="ssex != null and ssex != ''">
+                and SSEX = #{ssex}
+            </if>
+
+    </select>
+</mapper>

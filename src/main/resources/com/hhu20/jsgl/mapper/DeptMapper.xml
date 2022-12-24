@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 命名空间 -->
-<mapper namespace="test">
+<mapper namespace="com.hhu20.jsgl.mapper.DeptMapper">
     <select id="selectDept" resultType="com.hhu20.jsgl.pojo.Dept">
         select * from dept
     </select>

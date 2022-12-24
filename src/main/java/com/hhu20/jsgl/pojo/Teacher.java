@@ -1,10 +1,13 @@
 package com.hhu20.jsgl.pojo;
 
+import com.hhu20.jsgl.entity.User;
+
 public class Teacher {
     private String TNO   ;
     private String DNO   ;
     private String TNAME ;
     private String TSEX  ;
+
 
     @Override
     public String toString() {
