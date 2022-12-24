@@ -41,7 +41,7 @@ public class LoginAndRegister {
         Map<String,Object> outMap = new TreeMap<>();
         outMap.put("state",true);
         outMap.put("userName","feisen");
-        outMap.put("userType",0);
+        outMap.put("userType","0");
         return outMap;
     }
 
