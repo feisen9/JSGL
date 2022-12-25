@@ -1,17 +1,28 @@
 package com.hhu20.jsgl.controller;
 
+import com.hhu20.jsgl.entity.User;
 import com.hhu20.jsgl.intermediate.LoginAndRegister;
+import com.hhu20.jsgl.redis.RedisUtil;
+import com.hhu20.jsgl.util.AuthorizationService;
+import com.hhu20.jsgl.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Date;
 
 @RestController
 @RequestMapping(value="/users",method = {RequestMethod.POST,RequestMethod.GET})
 public class LoginController {
+
+    @Autowired
+    AuthorizationService authorizationService;
+
+    @Autowired
+    RedisUtil cache;
+    @Autowired
+    TokenUtil tokenUtil;
 
     @RequestMapping(value="userIdDuplication",method=RequestMethod.POST)
     public Map checkRegister(@RequestBody Map<String,Object> inMap){
@@ -45,6 +56,7 @@ public class LoginController {
             outMap.put("state","4001");
         }
         if(LoginAndRegister.Register(userId, password)){
+
             outMap.put("state","200");
         }else {
             outMap.put("state", "4003");
@@ -59,18 +71,21 @@ public class LoginController {
         String userId="test1", password= "test2";
         userId = (String) inMap.get("userId");
         password = (String) inMap.get("password");
-
         System.out.println(userId+" "+password);
 
-        if(!LoginAndRegister.checkRegister(userId)){
-            //用户不存在，失败 state = 4004
-            outMap = new TreeMap<>();
-            outMap.put("state","4004");
-            return outMap;
-        }
+
+//        if(!LoginAndRegister.checkRegister(userId)){
+//            //用户不存在，失败 state = 4004
+//            outMap = new TreeMap<>();
+//            outMap.put("state","4004");
+//            return outMap;
+//        }
 
         outMap = LoginAndRegister.Login(userId, password);
         if((boolean)outMap.get("state")==true){
+
+            String token = tokenUtil.createToken(userId);
+            outMap.put("token",token);
             outMap.replace("state","200");
             return outMap;
         }

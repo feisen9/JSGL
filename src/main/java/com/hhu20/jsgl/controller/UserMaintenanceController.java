@@ -1,9 +1,6 @@
 package com.hhu20.jsgl.controller;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -117,9 +114,9 @@ public class UserMaintenanceController {
     }
 
     @RequestMapping(value="getUserInfo",method=RequestMethod.POST)
-    public Map getUserInfo(@RequestBody Map<String,String> inMap){
+    public Map getUserInfo(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
-
+        String token = tokenMap.get("Authorization");
 
         return outMap;
     }

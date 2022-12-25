@@ -1,17 +1,48 @@
 package com.hhu20.jsgl.entity;
 
 public class User {
-    private String userId;
+    public String account;
+    public String password;
+    public String lastLoginTime;
 
-    public User(String userId) {
-        this.userId = userId;
+    public User(){
+
     }
 
-    public String getUserId(){
-        return this.userId;
+    public User(String account, String password) {
+        this.account = account;
+        this.password = password;
     }
 
-    public void setUserId(String userId){
-        this.userId = userId;
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(String lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "account='" + account + '\'' +
+                ", lastLoginTime='" + lastLoginTime + '\'' +
+                '}';
     }
 }
