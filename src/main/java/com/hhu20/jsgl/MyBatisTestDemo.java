@@ -1,8 +1,6 @@
 package com.hhu20.jsgl;
 
-import com.hhu20.jsgl.dao.SqlSessionTool;
-import com.hhu20.jsgl.dao.StudentDao;
-import com.hhu20.jsgl.dao.TeacherDao;
+import com.hhu20.jsgl.dao.*;
 import com.hhu20.jsgl.mapper.DeptMapper;
 import com.hhu20.jsgl.mapper.StudentMapper;
 import com.hhu20.jsgl.pojo.ADVISORS;
@@ -16,10 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MyBatisTestDemo {
     public static void main(String[] args) throws Exception {
@@ -54,15 +49,34 @@ public class MyBatisTestDemo {
         student.setMNO("cs0001");
         student.setSSEX("男");
         student.setSNAME("邹烨");
+
         Calendar calendar= Calendar.getInstance();
-        calendar.set(2020, 9, 1);  //年月日  也可以具体到时分秒如calendar.set(2015, 10, 12,11,32,52);
+        TimeZone timeZone = TimeZone.getTimeZone("Asia/Shanghai");
+        calendar.setTimeZone(timeZone);
+        calendar.set(2020, 8, 2,0,0,0);  //年月日(月份从0算起)  也可以具体到时分秒如calendar.set(2015, 10, 12,11,32,52);
         Date date=calendar.getTime();//date就是你需要的时间
         student.setENROLLMENTYEAR(date);
-        studentDao.insertStu(student);
+//        studentDao.insertStu(student);
+
+        studentDao.updateStu("jjk","2062810126","物联网工程","女",date,"机电工程学院");
 
         List<Map> students = studentDao.selectAll();
         System.out.println(students);
-
+///////////////////////////////////////////////////////////////////////////
+        TeacherDao teacherDao = new TeacherDao(sqlSession);
+//        teacherDao.insertTea("2020000004","边钰","女","机电工程学院");
+        teacherDao.updateTea("2020000001","边钰","女","机电工程学院");
+        List<Map> teachers = teacherDao.selectAll();
+        System.out.println(teachers);
+////////////////////////////////////////////////////////////////////////////////
+//        DeptDao deptDao = new DeptDao(sqlSession);
+//        System.out.println(deptDao.selectDnameForDno("商学院"));
+///////////////////////////////////////////////////////////////////////////
+//        UserDao userDao = new UserDao(sqlSession);
+//        userDao.updatePassword("2062810126","jjk");
+//        userDao.deleteOne("2062810126");
+//        List<Map> users = userDao.selectAll();
+//        System.out.println(users);
         //关闭sqlSession释放资源
         sqlSession.close();
 

@@ -17,7 +17,7 @@ public class SqlSessionTool {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
         //2、获取SqlSession对象，用它来执行sql
-        sqlSession = sqlSessionFactory.openSession();
+        sqlSession = sqlSessionFactory.openSession(true);
     }
     public SqlSession getSqlSession(){
         return this.sqlSession;

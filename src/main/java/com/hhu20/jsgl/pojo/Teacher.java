@@ -6,6 +6,15 @@ public class Teacher {
     private String TNAME ;
     private String TSEX  ;
 
+    public Teacher() {
+    }
+
+    public Teacher(String TNO, String DNO, String TNAME, String TSEX) {
+        this.TNO = TNO;
+        this.DNO = DNO;
+        this.TNAME = TNAME;
+        this.TSEX = TSEX;
+    }
 
     @Override
     public String toString() {
