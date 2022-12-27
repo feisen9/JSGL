@@ -6,6 +6,7 @@ import com.hhu20.jsgl.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -70,7 +71,23 @@ public class UserMaintenanceController {
         }
         String sno = inMap.get("sno");
 
-        List<Student> studentList = UserMaintenance.getStuInfoById(sno,false);
+        List<Map> rList = UserMaintenance.getStuInfoById(sno,false);
+        if(rList==null){
+            //查询失败
+            outMap.put("state","7001");
+            return outMap;
+        }
+        Map<String, Object> s = new TreeMap<String,Object>();
+        for(int i = 0; i < rList.size(); i += 1){
+            s.put("sname", (String) rList.get(i).get("SNAME"));
+            s.put("sno", (String) rList.get(i).get("SNO"));
+            s.put("major", (String) rList.get(i).get("MNAME"));
+            s.put("sex", (String) rList.get(i).get("SSEX"));
+            s.put("enrollmentYear", rList.get(i).get("ENROLLMENTYEAR"));
+            s.put("academy", (String) rList.get(i).get("DNAME"));
+        }
+        outMap.put("data",s);
+        outMap.put("state","200");
 
 
 
@@ -105,7 +122,25 @@ public class UserMaintenanceController {
             return outMap;
         }
 
-        List<Student> studentList = UserMaintenance.getStuInfoById("None",false);
+        List<Map> rList = UserMaintenance.getStuInfoById("None",true);
+        if(rList==null){
+            //查询失败
+            outMap.put("state","7001");
+            return outMap;
+        }
+        List<Map<String,Object>> data = new ArrayList<Map<String, Object>>();
+        for(int i = 0; i < rList.size(); i += 1){
+            Map<String, Object> s = new TreeMap<String,Object>();
+            s.put("sname", (String) rList.get(i).get("sname"));
+            s.put("sno", (String) rList.get(i).get("sno"));
+            s.put("major", (String) rList.get(i).get("mname"));
+            s.put("sex", (String) rList.get(i).get("ssex"));
+            s.put("enrollmentYear",  rList.get(i).get("enrollmentyear"));
+            s.put("academy", (String) rList.get(i).get("dname"));
+            data.add(s);
+        }
+        outMap.put("data",data);
+        outMap.put("state","200");
 
         return outMap;
     }

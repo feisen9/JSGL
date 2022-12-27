@@ -14,14 +14,4 @@ public class JsglApplication {
         SpringApplication.run(JsglApplication.class, args);
     }
 
-    public static void test(){
-
-        List<Student> studentList = UserMaintenance.getStuInfoById("a",true);
-
-        for (Student s: studentList){
-            System.out.println(s.getSNO());
-        }
-    }
-
-
 }
