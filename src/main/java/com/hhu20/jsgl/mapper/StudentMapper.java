@@ -4,12 +4,17 @@ import com.hhu20.jsgl.pojo.Student;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StudentMapper {
-    List<Student> selectAll();
-    List<Student> selectSNO(String SNO);
+
+    List<Map> selectAll();
+    List<Map> selectSNO(String SNO);
 
 //    条件查询
-    List<Student> selectByCondition(@Param("sno") String sno, @Param("mno") String mno, @Param("sname") String sname, @Param("ssex") String ssex);
+    List<Map> selectByCondition(@Param("sno") String sno, @Param("mno") String mno,
+                                    @Param("sname") String sname, @Param("ssex") String ssex);
+
+    void insertStu(Student student);
 }
 

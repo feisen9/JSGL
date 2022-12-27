@@ -5,6 +5,15 @@ public class ADVISORS {
     private String TEAMNO      ;
     private String TCOEFFICIENT;
 
+    public ADVISORS() {
+    }
+
+    public ADVISORS(String TNO, String TEAMNO, String TCOEFFICIENT) {
+        this.TNO = TNO;
+        this.TEAMNO = TEAMNO;
+        this.TCOEFFICIENT = TCOEFFICIENT;
+    }
+
     public String getTNO() {
         return TNO;
     }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 -->
+<mapper namespace="com.hhu20.jsgl.mapper.TeacherMapper">
+    <select id="selectAll" resultType="com.hhu20.jsgl.pojo.Teacher">
+        select * from teacher
+    </select>
+    <select id="selectTNO" resultType="com.hhu20.jsgl.pojo.Teacher">
+        select * from teacher where TNO like #{tno}
+    </select>
+</mapper>

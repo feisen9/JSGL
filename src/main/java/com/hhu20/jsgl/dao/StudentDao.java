@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 public class StudentDao {
     private SqlSession sqlSession;
@@ -18,21 +19,25 @@ public class StudentDao {
         this.sqlSession = sqlSession;
         studentMapper = sqlSession.getMapper(StudentMapper.class);
     }
-    public List<Student> selectAll(){
-        List<Student> students = studentMapper.selectAll();
+    public List<Map> selectAll(){
+        List<Map> students = studentMapper.selectAll();
         return students;
     }
-    public List<Student> selectSNO(String sno){     //支持学号模糊查询
-        List<Student> students = studentMapper.selectSNO(FuzzyQueryStr.unilateralFuzzy(sno));
+    public List<Map> selectSNO(String sno){     //支持学号模糊查询
+        List<Map> students = studentMapper.selectSNO(FuzzyQueryStr.unilateralFuzzy(sno));
         return students;
     }
-    public List<Student> selectByObject(Student student){   //支持学号、专业号、姓名、性别部分或全部参与模糊查询，传入的对象没有setter的成员变量处理为不参与查询
+    public List<Map> selectByObject(Student student){   //支持学号、专业号、姓名、性别部分或全部参与模糊查询，传入的对象没有setter的成员变量处理为不参与查询
         //动态的查询参数需要用student对象的setter方法实例化为一个对象传进来
-        List<Student> students = studentMapper.selectByCondition(
+        List<Map> students = studentMapper.selectByCondition(
                 FuzzyQueryStr.unilateralFuzzy(student.getSNO()),
                 FuzzyQueryStr.unilateralFuzzy(student.getMNO()),
                 FuzzyQueryStr.unilateralFuzzy(student.getSNAME()),
                 student.getSSEX());
         return students;
+    }
+    public void insertStu(Student student) throws Exception{
+        studentMapper.insertStu(student);
+        sqlSession.commit();    //提交事务
     }
 }
