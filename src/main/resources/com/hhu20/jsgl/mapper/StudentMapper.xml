@@ -36,7 +36,7 @@
     <select id="selectAll" resultType="java.util.Map">
         select * from stuinfo;
     </select>
-    <select id="selectSNO" resultType="com.hhu20.jsgl.pojo.Student">
+    <select id="selectSNO" resultType="java.util.Map">
         select * from stuinfo where sno like #{sno};
     </select>
     <select id="selectByCondition" resultType="java.util.Map">

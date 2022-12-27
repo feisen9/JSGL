@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 -->
+<mapper namespace="com.hhu20.jsgl.mapper.BonusRuleMapper">
+
+    <select id="selectAll"  resultType="java.util.Map">
+        select * from BonusRule;
+    </select>
+
+    <select id="select"  resultType="java.util.Map">
+        select * from BonusRule where bno=#{bno};
+    </select>
+
+    <select id="delete"  resultType="java.util.Map">
+        delete from BonusRule where bno=#{bno};
+    </select>
+
+    <select id="add"  resultType="java.util.Map">
+        insert into BonusRule(bno, s_firstprize_amount, s_secondprize_amount, s_thirdprize_amount,
+                              s_noprize_amount, t_firstprize_amount, t_secondprize_amount, t_thirdprize_amount,
+                              t_noprize_amount)
+        values(#{bno}, #{s_firstprize_amount}, #{s_secondprize_amount}, #{s_thirdprize_amount},
+                  #{s_noprize_amount}, #{t_firstprize_amount}, #{t_secondprize_amount}, #{t_thirdprize_amount},
+               #{t_noprize_amount})
+    </select>
+
+</mapper>

@@ -79,12 +79,12 @@ public class UserMaintenanceController {
         }
         Map<String, Object> s = new TreeMap<String,Object>();
         for(int i = 0; i < rList.size(); i += 1){
-            s.put("sname", (String) rList.get(i).get("SNAME"));
-            s.put("sno", (String) rList.get(i).get("SNO"));
-            s.put("major", (String) rList.get(i).get("MNAME"));
-            s.put("sex", (String) rList.get(i).get("SSEX"));
-            s.put("enrollmentYear", rList.get(i).get("ENROLLMENTYEAR"));
-            s.put("academy", (String) rList.get(i).get("DNAME"));
+            s.put("sname", (String) rList.get(i).get("sname"));
+            s.put("sno", (String) rList.get(i).get("sno"));
+            s.put("major", (String) rList.get(i).get("mname"));
+            s.put("sex", (String) rList.get(i).get("ssex"));
+            s.put("enrollmentYear", rList.get(i).get("enrollmentyear"));
+            s.put("academy", (String) rList.get(i).get("dname"));
         }
         outMap.put("data",s);
         outMap.put("state","200");
