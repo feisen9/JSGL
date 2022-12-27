@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 -->
+<mapper namespace="com.hhu20.jsgl.mapper.CompetitionMapper">
+
+    <select id="selectAll"  resultType="java.util.Map">
+        select * from Competition;
+    </select>
+
+<!--    <insert id="add"  keyProperty="cno">-->
+<!--        insert into Competition(cno,bno,cname,clevel,organizer,hostinstitue)-->
+<!--        values(#{cno}, #{bno}, #{cname}, #{clevel},-->
+<!--               #{organizer}, #{hostinstitue})-->
+<!--    </insert>-->
+
+    <select id="add"  resultType="java.util.Map">
+        insert into Competition(cno,bno,cname,clevel,organizer,hostinstitue)
+        values(#{cno}, #{bno}, #{cname}, #{clevel},
+               #{organizer}, #{hostinstitue})
+    </select>
+
+    <select id="delete"  resultType="java.util.Map">
+        delete from Competition where cno=#{cno};
+    </select>
+
+    <select id="update">
+        update Competition set bno=#{bno}, cname=#{cname}, clevel=#{clevel}, organizer=#{organizer},hostinstitue = #{hostinstitue} where cno=#{cno}
+    </select>
+
+    <select id="selectByCondition" resultType="java.util.Map">
+        select * from Competition
+        <where>
+            <if test="cno != null and cno != ''">
+                and cno = #{cno}
+            </if>
+            <if test="bno != null and bno != ''">
+                and bno = #{bno}
+            </if>
+            <if test="clevel != null and clevel != ''">
+                and clevel like '%${clevel}%'
+            </if>
+            <if test="cname != null and cname != ''">
+                and cname like '%${cname}%'
+            </if>
+            <if test="organizer != null and organizer != ''">
+                and organizer like '%${organizer}%'
+            </if>
+            <if test="hostinstitue != null and hostinstitue != ''">
+                and hostinstitue like '%${hostinstitue}%'
+            </if>
+        </where>
+    </select>
+
+</mapper>
