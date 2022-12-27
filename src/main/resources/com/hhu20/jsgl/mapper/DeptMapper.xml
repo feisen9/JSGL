@@ -7,4 +7,10 @@
     <select id="selectDept" resultType="com.hhu20.jsgl.pojo.Dept">
         select * from dept
     </select>
+    <select id="selectDnameForDno" resultType="java.lang.String">
+        select dno from dept where DNAME=#{dname};
+    </select>
+    <select id="selectAll" resultType="java.util.Map">
+        select * from dept;
+    </select>
 </mapper>

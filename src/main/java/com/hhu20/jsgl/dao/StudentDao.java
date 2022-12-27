@@ -1,5 +1,6 @@
 package com.hhu20.jsgl.dao;
 
+import com.hhu20.jsgl.mapper.MajorMapper;
 import com.hhu20.jsgl.mapper.StudentMapper;
 import com.hhu20.jsgl.pojo.Student;
 import com.hhu20.jsgl.utils.FuzzyQueryStr;
@@ -9,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,5 +41,16 @@ public class StudentDao {
     public void insertStu(Student student) throws Exception{
         studentMapper.insertStu(student);
         sqlSession.commit();    //提交事务
+    }
+
+    public void updateStu(String sname, String sno , String major, String sex ,
+                          Date enrollmentYear , String academy) throws Exception{
+        //通过DeptDao查出acdemy对应的dno
+        DeptDao deptDao = new DeptDao(sqlSession);
+        String dno = deptDao.selectDnameForDno(academy);
+        //通过MajorDao查出major对应的mno
+        MajorDao majorDao = new MajorDao(sqlSession);
+        String mno = majorDao.selectMnameForMno(major);
+        studentMapper.updateStu(sno,mno,sname,sex,enrollmentYear);
     }
 }

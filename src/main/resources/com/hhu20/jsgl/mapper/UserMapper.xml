@@ -4,4 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 命名空间 -->
 <mapper namespace="com.hhu20.jsgl.mapper.UserMapper">
+    <update id="updatePassword">
+        update `userpassword` set `password`=#{password} where userId=#{userId}
+    </update>
+    <delete id="deleteOne">
+        delete from userpassword where userId=#{userId};
+    </delete>
+    <select id="selectUserId" resultType="java.util.Map"></select>
+    <select id="selectAll" resultType="java.util.Map">
+        select * from userpassword;
+    </select>
 </mapper>

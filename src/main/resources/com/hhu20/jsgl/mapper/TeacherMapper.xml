@@ -4,10 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 命名空间 -->
 <mapper namespace="com.hhu20.jsgl.mapper.TeacherMapper">
-    <select id="selectAll" resultType="com.hhu20.jsgl.pojo.Teacher">
-        select * from teacher
+    <insert id="insertTea">
+        insert into teacher(tno, dno, tname, tsex)
+        values (#{TNO},#{DNO},#{TNAME},#{TSEX});
+    </insert>
+    <update id="updateTea">
+        update teacher
+        set
+            TNAME = #{tname},
+            DNO = #{dno},
+            TSEX = #{tsex}
+        where TNO = #{tno}
+    </update>
+    <select id="selectAll" resultType="java.util.Map">
+        select * from teainfo;
     </select>
-    <select id="selectTNO" resultType="com.hhu20.jsgl.pojo.Teacher">
-        select * from teacher where TNO like #{tno}
+    <select id="selectTNO" resultType="java.util.Map">
+        select * from teainfo where TNO like #{tno};
     </select>
+
 </mapper>
