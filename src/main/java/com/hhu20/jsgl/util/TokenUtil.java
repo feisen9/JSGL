@@ -18,7 +18,25 @@ public class TokenUtil {
     RedisUtil cache;
     public TokenUtil(){};
 
-    public Map<String,String> verifyToken(String accessToken){
+    public String verifyToken(String token){
+        String accessToken = (String) cache.get(token);
+        if(accessToken==null){
+            cache.del(token);
+            return null;
+        }
+        Map<String,String> map = verifyAccessToken(accessToken);
+        String userId = map.get("userId");
+        String aToken = map.get("Authorization");
+        if(userId==null){
+            cache.del(token);
+            return null;
+        }
+        cache.del(token);
+        cache.set(token,aToken);
+        return userId;
+    }
+
+    public Map<String,String> verifyAccessToken(String accessToken){
         Map<String,String> outMap = new TreeMap<>();
         String userId = authorizationService.verifyToken(accessToken);
         if(userId==null){
@@ -26,6 +44,7 @@ public class TokenUtil {
             userId = authorizationService.verifyToken(refreshToken);
             if(userId==null){
                 //失效了
+                cache.del(accessToken);
                 outMap.put("userId",null);
                 return outMap;
             }
@@ -45,11 +64,13 @@ public class TokenUtil {
     public String createToken(String userId){
         String accessToken = authorizationService.createAccessIdToken(userId);
         String refreshToken = authorizationService.createRefreshIdToken(userId);
+        String token = accessToken.toString();
         if(accessToken==null||refreshToken==null){
             return null;
         }
         cache.set(accessToken,refreshToken,600);//存储,600s
-        return accessToken;
+        cache.set(token,accessToken,600);
+        return token;
     }
 
 

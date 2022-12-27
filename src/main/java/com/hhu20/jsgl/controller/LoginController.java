@@ -2,12 +2,15 @@ package com.hhu20.jsgl.controller;
 
 import com.hhu20.jsgl.entity.User;
 import com.hhu20.jsgl.intermediate.LoginAndRegister;
+import com.hhu20.jsgl.intermediate.UserMaintenance;
+import com.hhu20.jsgl.pojo.Student;
 import com.hhu20.jsgl.redis.RedisUtil;
 import com.hhu20.jsgl.util.AuthorizationService;
 import com.hhu20.jsgl.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Date;
@@ -91,5 +94,27 @@ public class LoginController {
         }
         outMap.replace("state","4005");
         return outMap;
+    }
+
+    @RequestMapping(value="test",method=RequestMethod.POST)
+    public Map test(@RequestBody(required = false) Map<String,Object> inMap, @RequestHeader Map<String,String> tokenMap){
+        Map<String, Object> outMap = new TreeMap<>();
+//        for(String s : tokenMap.keySet()){
+//            System.out.println(s);
+//        }
+//        String token = tokenMap.get("authorization");
+//        System.out.println(token);
+//        String userId = tokenUtil.verifyToken(token);
+//        System.out.println(userId);
+//        outMap.put("userId",userId);
+
+//        System.out.println("start");
+//        List<Student> studentList = UserMaintenance.getStuInfoById("a",true);
+//
+//        for (Student s: studentList){
+//            System.out.println(s.getSNO());
+//        }
+//        System.out.println("end");
+//        return outMap;
     }
 }
