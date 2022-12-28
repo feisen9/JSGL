@@ -24,6 +24,8 @@ public class TeacherDao {
         return teacherMapper.selectTNO(FuzzyQueryStr.unilateralFuzzy(tno));
     }
 
+    public List<Map> select(String tno){ return teacherMapper.select(tno);};
+
     public void insertTea(String tno,String tname,String tsex,String academy) throws Exception{
         //调用DeptDao获取dno
         DeptDao deptDao = new DeptDao(sqlSession);

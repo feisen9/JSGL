@@ -19,6 +19,8 @@ public class UserDao {
         return userMapper.selectAll();
     }
 
+    public List<Map> select(String userId) { return userMapper.select(userId);}
+
     public void updatePassword (String userid,String password) throws Exception{
         userMapper.updatePassword(userid,password);
     }

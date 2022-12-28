@@ -29,6 +29,10 @@ public class StudentDao {
         List<Map> students = studentMapper.selectSNO(FuzzyQueryStr.unilateralFuzzy(sno));
         return students;
     }
+    public List<Map> select(String sno){     //支持学号模糊查询
+        List<Map> students = studentMapper.select(sno);
+        return students;
+    }
     public List<Map> selectByObject(Student student){   //支持学号、专业号、姓名、性别部分或全部参与模糊查询，传入的对象没有setter的成员变量处理为不参与查询
         //动态的查询参数需要用student对象的setter方法实例化为一个对象传进来
         List<Map> students = studentMapper.selectByCondition(
