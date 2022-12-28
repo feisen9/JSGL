@@ -64,7 +64,7 @@ public class LoginAndRegister {
         调用数据库类
         如果数据库中有，返回true，否则返回false；
          */
-        List<Map> user = select(userId);
+        List<Map> user = select(userId,false);
         if (user.size()==1) return true;
         return false;
     }
@@ -115,12 +115,9 @@ public class LoginAndRegister {
             outMap.put("state","4005");
         }
 
-        /*
-        一下用于模拟
-         */
         outMap.put("state","200");
-        outMap.put("userName",user.get("username"));
-        outMap.put("userType",user.get("usertype"));
+        outMap.put("userName",user.get("userName"));
+        outMap.put("userType",user.get("userType"));
         return outMap;
     }
 
