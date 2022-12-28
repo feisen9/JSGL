@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 -->
+<mapper namespace="com.hhu20.jsgl.mapper.PublishedCompetitionMapper">
+    <select id="selectAll"  resultType="java.util.Map">
+        select * from PublishedCompetition;
+    </select>
+    <select id="add"  resultType="java.util.Map">
+        insert into PublishedCompetition(PNO,CNO,PSTATE,R_INFO_COLLECT_TIME,A_INFO_COLLECT_TIME,R_INFO_DEADLINE,A_INFO_DEADLINE,SMAXNUM,TMAXNUM)
+        values(#{PNO}, #{CNO}, #{PSTATE}, #{R_INFO_COLLECT_TIME},#{A_INFO_COLLECT_TIME},
+               #{R_INFO_DEADLINE}, #{A_INFO_DEADLINE}, #{SMAXNUM}, #{TMAXNUM})
+    </select>
+
+    <select id="delete"  resultType="java.util.Map">
+        delete from PublishedCompetition where PNO=#{PNO};
+    </select>
+
+    <select id="update">
+        update PublishedCompetition set CNO=#{CNO}, PSTATE=#{PSTATE},
+                                R_INFO_COLLECT_TIME=#{R_INFO_COLLECT_TIME}, A_INFO_COLLECT_TIME=#{A_INFO_COLLECT_TIME},
+                                R_INFO_DEADLINE = #{R_INFO_DEADLINE},A_INFO_DEADLINE = #{A_INFO_DEADLINE},SMAXNUM = #{SMAXNUM},TMAXNUM = #{TMAXNUM} where PNO=#{PNO}
+    </select>
+
+    <select id="selectByCondition" resultType="java.util.Map">
+        select * from PublishedCompetition
+        <trim prefix="where" prefixOverrides="and | or ">
+            <if test="PNO != null and PNO != ''">
+                and PNO = #{PNO}
+            </if>
+            <if test="CNO != null and CNO != ''">
+                and CNO = #{CNO}
+            </if>
+            <if test="PSTATE != null and PSTATE != ''">
+                and PSTATE = #{PSTATE}
+            </if>
+            <if test="R_INFO_COLLECT_TIME != null and R_INFO_COLLECT_TIME != ''">
+                and R_INFO_COLLECT_TIME <![CDATA[ >= ]]> CAST(CONCAT(#{R_INFO_COLLECT_TIME},' 00:00:00') AS datetime)
+            </if>
+            <if test="A_INFO_COLLECT_TIME != null and A_INFO_COLLECT_TIME != ''">
+                and A_INFO_COLLECT_TIME <![CDATA[ >= ]]> CAST(CONCAT(#{A_INFO_COLLECT_TIME},' 00:00:00') AS datetime)
+            </if>
+            <if test="R_INFO_DEADLINE != null and R_INFO_DEADLINE != ''">
+                and R_INFO_DEADLINE <![CDATA[ <= ]]> CAST(CONCAT(#{R_INFO_DEADLINE},' 00:00:00') AS datetime)
+            </if>
+            <if test="A_INFO_DEADLINE != null and A_INFO_DEADLINE != ''">
+                and A_INFO_DEADLINE <![CDATA[ <= ]]> CAST(CONCAT(#{A_INFO_DEADLINE},' 00:00:00') AS datetime)
+            </if>
+            <if test="SMAXNUM != null and SMAXNUM != ''">
+                and SMAXNUM = #{SMAXNUM}
+            </if>
+            <if test="TMAXNUM != null and TMAXNUM != ''">
+                and TMAXNUM = #{TMAXNUM}
+            </if>
+        </trim>
+    </select>
+</mapper>

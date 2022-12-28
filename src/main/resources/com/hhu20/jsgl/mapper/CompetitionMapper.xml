@@ -31,7 +31,7 @@
 
     <select id="selectByCondition" resultType="java.util.Map">
         select * from Competition
-        <where>
+        <trim prefix="where" prefixOverrides="and | or ">
             <if test="cno != null and cno != ''">
                 and cno = #{cno}
             </if>
@@ -39,18 +39,36 @@
                 and bno = #{bno}
             </if>
             <if test="clevel != null and clevel != ''">
-                and clevel like '%${clevel}%'
+                and clevel like concat('%',#{clevel},'%')
             </if>
             <if test="cname != null and cname != ''">
-                and cname like '%${cname}%'
+                and cname like concat('%',#{cname},'%')
             </if>
             <if test="organizer != null and organizer != ''">
-                and organizer like '%${organizer}%'
+                and organizer like concat('%',#{organizer},'%')
             </if>
             <if test="hostinstitue != null and hostinstitue != ''">
-                and hostinstitue like '%${hostinstitue}%'
+                and hostinstitue like concat('%',#{hostinstitue},'%')
             </if>
-        </where>
+        </trim>
     </select>
 
+
+<!--    <select id="selectByCondition" resultType="java.util.Map">-->
+<!--        select * from Competition where 1=1-->
+<!--        <where>-->
+<!--            <if test="clevel != null and clevel != ''">-->
+<!--                and clevel like '%${clevel}%'-->
+<!--            </if>-->
+<!--            <if test="cname != null and cname != ''">-->
+<!--                and cname like '%${cname}%'-->
+<!--            </if>-->
+<!--            <if test="organizer != null and organizer != ''">-->
+<!--                and organizer like '%${organizer}%'-->
+<!--            </if>-->
+<!--            <if test="hostinstitue != null and hostinstitue != ''">-->
+<!--                and hostinstitue like '%${hostinstitue}%'-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
 </mapper>

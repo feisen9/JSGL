@@ -58,24 +58,25 @@ class CompetitionMapperTest {
 //        System.out.println("result = " + result2);
 
 
-//        String cno = "";
-//        String bno = "";
-//        String organizer = "";
-//        String hostintitue = "";
-//        String search_cname = "科技";
-//        String search_clevel = "一级竞赛";
-//
-//        List<Map> list = competitionMapper.selectByCondition(cno,bno,search_cname,search_clevel,organizer,hostintitue);
-//        for(int i = 0;i<list.size();i++){
-//            Map<String, Object> map = list.get(i);
-//            Iterator it = map.keySet().iterator();
-//            while (it.hasNext()) {
-//                String str = (String) it.next();
-//                System.out.print(str+": ");
-//                System.out.print(map.get(str)+"\t  ");
-//            }
-//            System.out.println();
-//        }
+        String cno = "";
+        String bno = "";
+        String organizer = "";
+        String hostintitue = "";
+        String search_cname = "科技";
+//        String search_cname = "科技%' OR 'a' Like '%a";
+        String search_clevel = "一级竞赛";
+
+        List<Map> list = competitionMapper.selectByCondition(cno,bno,search_cname,search_clevel,organizer,hostintitue);
+        for(int i = 0;i<list.size();i++){
+            Map<String, Object> map = list.get(i);
+            Iterator it = map.keySet().iterator();
+            while (it.hasNext()) {
+                String str = (String) it.next();
+                System.out.print(str+": ");
+                System.out.print(map.get(str)+"\t  ");
+            }
+            System.out.println();
+        }
 
         session.close();
     }
