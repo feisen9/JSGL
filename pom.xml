@@ -59,13 +59,13 @@
             <version>3.19.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
-        <!-- 加密用的 -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.11</version>
-        </dependency>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/commons-codec/commons-codec &ndash;&gt;-->
+<!--        &lt;!&ndash; 加密用的 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>commons-codec</groupId>-->
+<!--            <artifactId>commons-codec</artifactId>-->
+<!--            <version>1.11</version>-->
+<!--        </dependency>-->
 
         <!-- 加密用的 -->
         <!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.codec -->
