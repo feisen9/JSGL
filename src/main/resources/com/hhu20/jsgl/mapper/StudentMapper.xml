@@ -25,6 +25,9 @@
     <select id="selectSNO" resultType="java.util.Map">
         select * from stuinfo where sno like #{sno};
     </select>
+    <select id="select" resultType="java.util.Map">
+        select * from stuinfo where sno = #{sno};
+    </select>
     <select id="selectByCondition" resultType="java.util.Map">
         select *
         from Student

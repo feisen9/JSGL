@@ -9,6 +9,7 @@ import java.util.Map;
 public interface TeacherMapper {
     List<Map> selectAll();
     List<Map> selectTNO(String tno);
+    List<Map> select(String tno);
     void insertTea(Teacher teacher);
     void updateTea(String tname,String tno,String tsex,String dno);
 }

@@ -14,4 +14,7 @@
     <select id="selectAll" resultType="java.util.Map">
         select * from userpassword;
     </select>
+    <select id="select" resultType="java.util.Map">
+        select * from userpassword where userId = #{userId};
+    </select>
 </mapper>

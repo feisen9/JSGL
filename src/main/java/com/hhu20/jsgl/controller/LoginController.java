@@ -59,7 +59,7 @@ public class LoginController {
             outMap.put("state","4001");
         }
         if(LoginAndRegister.Register(userId, password)){
-
+            //成功
             outMap.put("state","200");
         }else {
             outMap.put("state", "4003");
@@ -85,36 +85,13 @@ public class LoginController {
 //        }
 
         outMap = LoginAndRegister.Login(userId, password);
-        if((boolean)outMap.get("state")==true){
+        if((String)outMap.get("state")=="200"){
 
             String token = tokenUtil.createToken(userId);
             outMap.put("token",token);
-            outMap.replace("state","200");
             return outMap;
         }
-        outMap.replace("state","4005");
         return outMap;
     }
 
-    @RequestMapping(value="test",method=RequestMethod.POST)
-    public Map test(@RequestBody(required = false) Map<String,Object> inMap, @RequestHeader Map<String,String> tokenMap){
-        Map<String, Object> outMap = new TreeMap<>();
-//        for(String s : tokenMap.keySet()){
-//            System.out.println(s);
-//        }
-//        String token = tokenMap.get("authorization");
-//        System.out.println(token);
-//        String userId = tokenUtil.verifyToken(token);
-//        System.out.println(userId);
-//        outMap.put("userId",userId);
-
-//        System.out.println("start");
-//        List<Student> studentList = UserMaintenance.getStuInfoById("a",true);
-//
-//        for (Student s: studentList){
-//            System.out.println(s.getSNO());
-//        }
-//        System.out.println("end");
-        return outMap;
-    }
 }

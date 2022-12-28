@@ -12,6 +12,8 @@ public interface StudentMapper {
     List<Map> selectAll();
     List<Map> selectSNO(String SNO);
 
+    List<Map> select(String SNO);
+
 //    条件查询
     List<Map> selectByCondition(@Param("sno") String sno, @Param("mno") String mno,
                                     @Param("sname") String sname, @Param("ssex") String ssex);

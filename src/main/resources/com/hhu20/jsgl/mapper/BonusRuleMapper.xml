@@ -17,6 +17,19 @@
         delete from BonusRule where bno=#{bno};
     </select>
 
+    <select id="update" resultType="java.util.Map">
+        update BonusRule
+        set s_firstprize_amount = #{s_firstprize_amount},
+            s_secondprize_amount = #{s_secondprize_amount},
+            s_thirdprize_amount = #{s_thirdprize_amount},
+            s_noprize_amount = #{s_noprize_amount},
+            t_firstprize_amount = #{t_firstprize_amount},
+            t_secondprize_amount = #{t_secondprize_amount},
+            t_thirdprize_amount = #{t_thirdprize_amount},
+            t_noprize_amount = #{t_noprize_amount}
+        where bno = #{bno};
+    </select>
+
     <select id="add"  resultType="java.util.Map">
         insert into BonusRule(bno, s_firstprize_amount, s_secondprize_amount, s_thirdprize_amount,
                               s_noprize_amount, t_firstprize_amount, t_secondprize_amount, t_thirdprize_amount,

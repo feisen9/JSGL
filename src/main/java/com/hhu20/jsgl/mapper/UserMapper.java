@@ -13,4 +13,6 @@ public interface UserMapper {
     void updatePassword(@Param("userId") String userid, @Param("password") String password);
     void deleteOne(@Param("userId") String userId);
 
+    List<Map> select(String userId);
+
 }
