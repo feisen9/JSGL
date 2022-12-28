@@ -12,13 +12,17 @@ import java.util.TreeMap;
 
 public class LoginAndRegister {
 
-    public static List<Map> select(String userId){
+    public static List<Map> select(String userId,boolean all){
         List<Map> user;
         try {
             SqlSessionTool sqlSessionTool = new SqlSessionTool();
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
             UserDao userDao = new UserDao(sqlSession);
-            user = userDao.select(userId);
+            if(all){
+                user = userDao.selectAll();
+            }else {
+                user = userDao.select(userId);
+            }
             sqlSession.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -34,6 +38,22 @@ public class LoginAndRegister {
             UserDao userDao = new UserDao(sqlSession);
             sqlSession.close();
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
+    }
+
+    public static boolean delete(String userId){
+        List<Map> user;
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            UserDao userDao = new UserDao(sqlSession);
+            userDao.deleteOne(userId);
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return true;
@@ -85,7 +105,7 @@ public class LoginAndRegister {
          */
         Map<String,Object> outMap = new TreeMap<>();
 
-        List<Map> users = select(userId);
+        List<Map> users = select(userId,false);
         if(users.size()!=1){
             outMap.put("state","4005");
             return outMap;
