@@ -40,7 +40,7 @@ public class CompetitionMaintenanceController {
             map.put("clevel",rList.get(i).get("clevel"));
             map.put("organizer",rList.get(i).get("organizer"));
             map.put("hostinstitue",rList.get(i).get("hostinstitue"));
-            map.put("bno",rList.get(i).get("bno"));
+
             data.add(map);
         }
         outMap.put("state","200");
@@ -57,7 +57,6 @@ public class CompetitionMaintenanceController {
         String clevel = inMap.get("clevel");
         String organizer = inMap.get("organizer");
         String hostinstitue = inMap.get("hostinstitue");
-        String bno = inMap.get("bno");
 
 
         return outMap;
@@ -97,7 +96,7 @@ public class CompetitionMaintenanceController {
         String cno = inMap.get("cno");
 
         CompetitionMaintenance.delete(cno);
-        List<Map> rList = CompetitionMaintenance.select(cno,null,null,null,null,null);
+        List<Map> rList = CompetitionMaintenance.select(cno,null,null,null,null);
         if(rList.size()>0){
             //失败
             outMap.put("state","4007");
@@ -123,9 +122,8 @@ public class CompetitionMaintenanceController {
         String clevel = inMap.get("clevel");
         String organizer = inMap.get("organizer");
         String hostinstitue = inMap.get("hostinstitue");
-        String bno = inMap.get("bno");
 
-        List<Map> rList = CompetitionMaintenance.select(cno,bno,cname,clevel,organizer,hostinstitue);
+        List<Map> rList = CompetitionMaintenance.select(cno,cname,clevel,organizer,hostinstitue);
         if(rList==null){
             //查询失败
             outMap.put("state","7001");
@@ -139,7 +137,6 @@ public class CompetitionMaintenanceController {
             map.put("clevel",rList.get(i).get("clevel"));
             map.put("organizer",rList.get(i).get("organizer"));
             map.put("hostinstitue",rList.get(i).get("hostinstitue"));
-            map.put("bno",rList.get(i).get("bno"));
             data.add(map);
         }
         outMap.put("state","200");

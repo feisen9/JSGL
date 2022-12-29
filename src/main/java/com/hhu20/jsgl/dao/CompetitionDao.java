@@ -17,9 +17,9 @@ public class CompetitionDao {
         List<Map> outMap = competitionMapper.selectAll();
         return outMap;
     }
-    public  List<Map> add(String cno, String bno, String cname, String clevel,
+    public  List<Map> add(String cno, String cname, String clevel,
                          String organizer, String hostintitue){
-        List<Map> outMap = competitionMapper.add(cno, bno, cname, clevel,
+        List<Map> outMap = competitionMapper.add(cno, cname, clevel,
                 organizer, hostintitue);
         return outMap;
     }
@@ -28,17 +28,17 @@ public class CompetitionDao {
         return outMap;
     }
 
-    public List<Map> update(String cno, String bno, String cname, String clevel,
+    public List<Map> update(String cno, String cname, String clevel,
                             String organizer, String hostintitue){
-        List<Map> outMap = competitionMapper.update(cno, bno, cname, clevel,
+        List<Map> outMap = competitionMapper.update(cno, cname, clevel,
                 organizer, hostintitue);
         return outMap;
     }
 
 
-    public List<Map> selectByCondition(String cno, String bno, String cname, String clevel,
+    public List<Map> selectByCondition(String cno, String cname, String clevel,
                                        String organizer, String hostintitue){
-        List<Map> outMap = competitionMapper.selectByCondition(cno, bno, cname, clevel,
+        List<Map> outMap = competitionMapper.selectByCondition(cno, cname, clevel,
                 organizer, hostintitue);
         return outMap;
     }

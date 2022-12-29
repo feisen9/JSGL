@@ -16,8 +16,8 @@
 <!--    </insert>-->
 
     <select id="add"  resultType="java.util.Map">
-        insert into Competition(cno,bno,cname,clevel,organizer,hostinstitue)
-        values(#{cno}, #{bno}, #{cname}, #{clevel},
+        insert into Competition(cno,cname,clevel,organizer,hostinstitue)
+        values(#{cno}, #{cname}, #{clevel},
                #{organizer}, #{hostinstitue})
     </select>
 
@@ -26,7 +26,7 @@
     </select>
 
     <select id="update">
-        update Competition set bno=#{bno}, cname=#{cname}, clevel=#{clevel}, organizer=#{organizer},hostinstitue = #{hostinstitue} where cno=#{cno}
+        update Competition set cname=#{cname}, clevel=#{clevel}, organizer=#{organizer},hostinstitue = #{hostinstitue} where cno=#{cno}
     </select>
 
     <select id="selectByCondition" resultType="java.util.Map">
@@ -34,9 +34,6 @@
         <trim prefix="where" prefixOverrides="and | or ">
             <if test="cno != null and cno != ''">
                 and cno = #{cno}
-            </if>
-            <if test="bno != null and bno != ''">
-                and bno = #{bno}
             </if>
             <if test="clevel != null and clevel != ''">
                 and clevel like concat('%',#{clevel},'%')
