@@ -10,7 +10,9 @@
     <delete id="deleteOne">
         delete from userpassword where userId=#{userId};
     </delete>
-    <select id="selectUserId" resultType="java.util.Map"></select>
+    <select id="selectUserId" resultType="java.util.Map">
+        select * from userpassword where userId like #{userId};
+    </select>
     <select id="selectAll" resultType="java.util.Map">
         select * from userpassword;
     </select>
