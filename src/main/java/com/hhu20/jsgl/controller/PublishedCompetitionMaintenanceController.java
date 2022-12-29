@@ -25,8 +25,7 @@ public class PublishedCompetitionMaintenanceController {
             outMap.put("state","5000");
             return outMap;
         }
-        String cno = inMap.get("cno");
-        String pname = inMap.get("pname");
+        String cname = inMap.get("cname");
         String pstate = inMap.get("pstate");
         String regCollectTime = inMap.get("regCollectTime");
         String regDeadline = inMap.get("regDeadline");
@@ -35,6 +34,7 @@ public class PublishedCompetitionMaintenanceController {
         String sMaxNum = inMap.get("sMaxNum");
         String tMaxNum = inMap.get("tMaxNum");
 
+//        PublishedCompetitionMaintenance.ad,sMaxNum,tMaxNum);
 
         return outMap;
     }
@@ -77,10 +77,17 @@ public class PublishedCompetitionMaintenanceController {
     }
 
     @RequestMapping(value="update",method=RequestMethod.PUT)
-    public Map update(@RequestBody Map<String,String> inMap){
+    public Map update(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String pno = inMap.get("pno");
-        String pname = inMap.get("pname");
+        String cname = inMap.get("cname");
         String pstate = inMap.get("pstate");
         String regCollectTime = inMap.get("regCollectTime");
         String regDeadline = inMap.get("regDeadline");
@@ -89,6 +96,9 @@ public class PublishedCompetitionMaintenanceController {
         String sMaxNum = inMap.get("sMaxNum");
         String tMaxNum = inMap.get("tMaxNum");
 
+        PublishedCompetitionMaintenance.update(pno,cname,pstate,regCollectTime,awardCollectTime,
+                regDeadline,awardDeadline,sMaxNum,tMaxNum);
+        outMap.put("state","200");
 
         return outMap;
     }
@@ -131,6 +141,29 @@ public class PublishedCompetitionMaintenanceController {
         String sMaxNum = inMap.get("sMaxNum");
         String tMaxNum = inMap.get("tMaxNum");
 
+        List<Map> rList = PublishedCompetitionMaintenance.select(pno,cname,pstate,regCollectTime,awardCollectTime,
+                regDeadline,awardDeadline,sMaxNum,tMaxNum);
+        if(rList==null){
+            //查询失败
+            outMap.put("state","7001");
+            return outMap;
+        }
+        List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
+        for(int i = 0; i < rList.size(); i += 1){
+            Map<String,Object> map = new TreeMap<>();
+            map.put("pno",rList.get(i).get("pno"));
+            map.put("cname",rList.get(i).get("cname"));
+            map.put("pstate",rList.get(i).get("pstate"));
+            map.put("regCollectTime",rList.get(i).get("r_info_collect_time"));
+            map.put("regdeadline",rList.get(i).get("r_info_deadline"));
+            map.put("awardCollectTime",rList.get(i).get("a_info_collect_time"));
+            map.put("awardDeadline",rList.get(i).get("a_info_deadline"));
+            map.put("sMaxNum",rList.get(i).get("smaxnum"));
+            map.put("tMaxNum",rList.get(i).get("tmaxnum"));
+            data.add(map);
+        }
+        outMap.put("state","200");
+        outMap.put("date",data);
 
         return outMap;
     }
