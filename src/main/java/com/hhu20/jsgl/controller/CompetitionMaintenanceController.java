@@ -33,6 +33,9 @@ public class CompetitionMaintenanceController {
             return outMap;
         }
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
+        for(Object s: rList.get(0).keySet()){
+            System.out.println((String)s);
+        }
         for(int i = 0; i < rList.size(); i += 1){
             Map<String,Object> map = new TreeMap<>();
             map.put("cno",rList.get(i).get("cno"));
@@ -44,7 +47,7 @@ public class CompetitionMaintenanceController {
             data.add(map);
         }
         outMap.put("state","200");
-        outMap.put("date",data);
+        outMap.put("data",data);
 
         return outMap;
     }
@@ -130,6 +133,9 @@ public class CompetitionMaintenanceController {
             return outMap;
         }
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
+        for(Object s: rList.get(0).keySet()){
+            System.out.println((String)s);
+        }
         for(int i = 0; i < rList.size(); i += 1){
             Map<String,Object> map = new TreeMap<>();
             map.put("cno",rList.get(i).get("cno"));
@@ -140,7 +146,7 @@ public class CompetitionMaintenanceController {
             data.add(map);
         }
         outMap.put("state","200");
-        outMap.put("date",data);
+        outMap.put("data",data);
 
 
         return outMap;

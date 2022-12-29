@@ -71,7 +71,7 @@ public class PublishedCompetitionMaintenanceController {
             data.add(map);
         }
         outMap.put("state","200");
-        outMap.put("date",data);
+        outMap.put("data",data);
 
         return outMap;
     }
@@ -163,7 +163,7 @@ public class PublishedCompetitionMaintenanceController {
             data.add(map);
         }
         outMap.put("state","200");
-        outMap.put("date",data);
+        outMap.put("data",data);
 
         return outMap;
     }
