@@ -116,8 +116,8 @@ public class LoginAndRegister {
         }
 
         outMap.put("state","200");
-        outMap.put("userName",user.get("userName"));
-        outMap.put("userType",user.get("userType"));
+        outMap.put("userName",user.get("username"));
+        outMap.put("userType",user.get("usertype"));
         return outMap;
     }
 

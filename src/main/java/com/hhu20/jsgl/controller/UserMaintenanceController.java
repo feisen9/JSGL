@@ -166,6 +166,9 @@ public class UserMaintenanceController {
             return outMap;
         }
         List<Map<String,Object>> data = new ArrayList<Map<String, Object>>();
+        for(Object s: rList.get(0).keySet()){
+            System.out.println((String)s);
+        }
         for(int i = 0; i < rList.size(); i += 1){
             Map<String, Object> s = new TreeMap<String,Object>();
             s.put("sname", (String) rList.get(i).get("sname"));
@@ -197,6 +200,9 @@ public class UserMaintenanceController {
             //查询失败
             outMap.put("state","7001");
             return outMap;
+        }
+        for(Object s: rList.get(0).keySet()){
+            System.out.println((String)s);
         }
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
         for(int i = 0; i < rList.size(); i += 1){

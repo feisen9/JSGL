@@ -89,7 +89,7 @@ public class LoginController {
 
             String token = tokenUtil.createToken(userId);
             outMap.put("token",token);
-            System.out.println(outMap.get("userName"));
+            System.out.println(outMap.get("username"));
             return outMap;
         }
         return outMap;
