@@ -37,14 +37,14 @@ public class CompetitionMaintenance {
         }
     }
 
-    public static List<Map> select(String cno, String bno, String cname, String clevel,
+    public static List<Map> select(String cno, String cname, String clevel,
                                    String organizer, String hostintitue){
         List<Map> compts;
         try {
             SqlSessionTool sqlSessionTool = new SqlSessionTool();
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
             CompetitionDao competitionDao = new CompetitionDao(sqlSession);
-            compts = competitionDao.selectByCondition(cno,bno,cname,clevel,organizer,hostintitue);
+            compts = competitionDao.selectByCondition(cno,cname,clevel,organizer,hostintitue);
             sqlSession.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
