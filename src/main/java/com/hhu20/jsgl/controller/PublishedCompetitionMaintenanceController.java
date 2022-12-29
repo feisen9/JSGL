@@ -60,6 +60,7 @@ public class PublishedCompetitionMaintenanceController {
         for(int i = 0; i < rList.size(); i += 1){
             Map<String,Object> map = new TreeMap<>();
             map.put("pno",rList.get(i).get("pno"));
+            map.put("cname",rList.get(i).get("cname"));
             map.put("pstate",rList.get(i).get("pstate"));
             map.put("regCollectTime",rList.get(i).get("r_info_collect_time"));
             map.put("regdeadline",rList.get(i).get("r_info_deadline"));
@@ -93,19 +94,35 @@ public class PublishedCompetitionMaintenanceController {
     }
 
     @RequestMapping(value="delete",method=RequestMethod.POST)
-    public Map delete(@RequestBody Map<String,String> inMap){
+    public Map delete(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String pno = inMap.get("pno");
 
+        PublishedCompetitionMaintenance.delete(pno);
+        outMap.put("state","200");
 
         return outMap;
     }
 
     @RequestMapping(value="searchPublishedCompt",method=RequestMethod.POST)
-    public Map searchPublishedCompt(@RequestBody Map<String,String> inMap){
+    public Map searchPublishedCompt(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String pno = inMap.get("pno");
-        String pname = inMap.get("pname");
+        String cname = inMap.get("cname");
         String pstate = inMap.get("pstate");
         String regCollectTime = inMap.get("regCollectTime");
         String regDeadline = inMap.get("regDeadline");

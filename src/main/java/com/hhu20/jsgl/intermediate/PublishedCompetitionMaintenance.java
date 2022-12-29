@@ -23,4 +23,16 @@ public class PublishedCompetitionMaintenance {
         }
         return pcompts;
     }
+
+    public static void delete(String pno){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            PublishedCompetitionDao publishedCompetitionDao= new PublishedCompetitionDao(sqlSession);
+            publishedCompetitionDao.delete(pno);
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
