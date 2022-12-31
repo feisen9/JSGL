@@ -1,8 +1,7 @@
 package com.hhu20.jsgl.dao;
 
-import com.hhu20.jsgl.mapper.AdvisorsMapper;
 import com.hhu20.jsgl.mapper.AwardMapper;
-import com.hhu20.jsgl.pojo.Team;
+import com.hhu20.jsgl.utils.FuzzyQueryStr;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -51,5 +50,8 @@ public class AwardDao {
     public void auditAwardInfo(String teamno,String awardAuditResult) throws Exception {
         TeamDao teamDao = new TeamDao(sqlSession);
         teamDao.updateAwardAuditResult(teamno,awardAuditResult);
+    }
+    public List<Map> searchAward(int pno,String cname,String awardInfo,String sno,String sname,String tno,String tname,String awardAuditResult){
+        return awardMapper.searchAward(pno, FuzzyQueryStr.bilateralFuzzy(cname), awardInfo, sno, FuzzyQueryStr.bilateralFuzzy(sname), tno, FuzzyQueryStr.bilateralFuzzy(tname), awardAuditResult);
     }
 }

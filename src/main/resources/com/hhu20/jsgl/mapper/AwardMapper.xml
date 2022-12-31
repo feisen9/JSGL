@@ -6,4 +6,52 @@
 <mapper namespace="com.hhu20.jsgl.mapper.AwardMapper">
 
 
+    <select id="searchAward" resultType="java.util.Map">
+        select teamno,pno,awardinfo
+        from team
+        where 1=1
+        <if test="pno != null and pno != ''">
+            and pno=#{pno}
+        </if>
+        <if test="awardInfo != null and awardInfo != ''">
+            and awardInfo = #{awardInfo}
+        </if>
+        <if test="awardAuditResult != null and awardAuditResult != ''">
+            and a_audit_result = #{awardAuditResult}
+        </if>
+        <if test="cname != null and cname != ''">
+#           模糊查询
+            and exists (
+                select *
+                from team_publishedcompetion natural join competition
+                where teamno = team.teamno and cname like #{cname}
+            )
+        </if>
+        <if test="sno != null and sno != ''">
+            and EXISTS (
+                select *
+                FROM teammember
+                where teammember.teamno = team.teamno and teammember.sno = #{sno})
+        </if>
+        <if test="sname != null and sname != ''">
+#           模糊查询
+            and EXISTS (
+                select *
+                from teammember natural join student
+                where teamno = team.teamno and sname like #{sname}
+                )
+        </if>
+        <if test="tno != null and tno != ''">
+            and EXISTS (select * FROM advisors where advisors.teamno = team.teamno and advisors.tno = #{tno})
+        </if>
+        <if test="tname != null and tname != ''">
+#             模糊查询
+            and EXISTS (
+                select *
+                from advisors natural join teacher
+                where teamno = team.teamno and tname like #{tname}
+            )
+        </if>
+
+    </select>
 </mapper>
