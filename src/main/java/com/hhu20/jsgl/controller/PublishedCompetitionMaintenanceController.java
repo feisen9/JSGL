@@ -25,7 +25,7 @@ public class PublishedCompetitionMaintenanceController {
             outMap.put("state","5000");
             return outMap;
         }
-        String cname = inMap.get("cname");
+        String cno = inMap.get("cno");
         String pstate = inMap.get("pstate");
         String regCollectTime = inMap.get("regCollectTime");
         String regDeadline = inMap.get("regDeadline");
@@ -34,7 +34,22 @@ public class PublishedCompetitionMaintenanceController {
         String sMaxNum = inMap.get("sMaxNum");
         String tMaxNum = inMap.get("tMaxNum");
 
-//        PublishedCompetitionMaintenance.ad,sMaxNum,tMaxNum);
+        PublishedCompetitionMaintenance.add(null,cno,pstate,regCollectTime,awardCollectTime,regDeadline,
+                awardDeadline,sMaxNum,tMaxNum);
+        List<Map> rList = PublishedCompetitionMaintenance.select(null,cno,pstate,regCollectTime,awardCollectTime,regDeadline,
+                awardDeadline,sMaxNum,tMaxNum);
+        if(rList==null || rList.size()!=1){
+            outMap.put("state","4003");
+            return outMap;
+        }
+        if(rList.get(0).get("pno")==null){
+            outMap.put("state","4003");
+            return outMap;
+        }
+        outMap.put("state","200");
+        Map<String, Object> data = new TreeMap<>();
+        data.put("pno",rList.get(0).get("pno"));
+        outMap.put("data",data);
 
         return outMap;
     }

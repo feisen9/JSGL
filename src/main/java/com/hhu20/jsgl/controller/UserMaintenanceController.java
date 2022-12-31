@@ -7,10 +7,7 @@ import com.hhu20.jsgl.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @RestController
 @RequestMapping(value="/users",method={RequestMethod.PUT,RequestMethod.PUT})
@@ -18,7 +15,7 @@ public class UserMaintenanceController {
     @Autowired
     TokenUtil tokenUtil;
     @RequestMapping(value="stuUpdate",method=RequestMethod.PUT)
-    public Map stuUpdate(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
+    public Map stuUpdate(@RequestBody Map<String,Object> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
         String token = tokenMap.get("authorization");
         String userId = tokenUtil.verifyToken(token);
@@ -28,13 +25,19 @@ public class UserMaintenanceController {
             return outMap;
         }
 
-        String sname = inMap.get("sname");
-        String sno = inMap.get("sno");
-        String major = inMap.get("major");
-        String sex = inMap.get("sex");
-        String enrollmentYear = inMap.get("enrollmentYear");
-        String academy = inMap.get("academy");
+        String sname = (String) inMap.get("sname");
+        String sno = (String) inMap.get("sno");
+        String major = (String) inMap.get("major");
+        String sex = (String) inMap.get("sex");
+        Date enrollmentYear = (Date) inMap.get("enrollmentYear");
+        String academy = (String) inMap.get("academy");
 
+        UserMaintenance.stuUpdate(sname,sno,major,sex,enrollmentYear,academy);
+        /*
+        todo
+        check 更新成功
+         */
+        outMap.put("state","200");
 
         return outMap;
     }

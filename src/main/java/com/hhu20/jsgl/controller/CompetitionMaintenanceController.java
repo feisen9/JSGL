@@ -33,9 +33,6 @@ public class CompetitionMaintenanceController {
             return outMap;
         }
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
-        for(Object s: rList.get(0).keySet()){
-            System.out.println((String)s);
-        }
         for(int i = 0; i < rList.size(); i += 1){
             Map<String,Object> map = new TreeMap<>();
             map.put("cno",rList.get(i).get("cno"));
@@ -61,6 +58,8 @@ public class CompetitionMaintenanceController {
         String organizer = inMap.get("organizer");
         String hostinstitue = inMap.get("hostinstitue");
 
+        CompetitionMaintenance.add(cno,cname,clevel,organizer,hostinstitue);
+        outMap.put("state","200");
 
         return outMap;
     }
@@ -80,8 +79,27 @@ public class CompetitionMaintenanceController {
         String organizer = inMap.get("organizer");
         String hostinstitue = inMap.get("hostinstitue");
 
+        List<Map> test = CompetitionMaintenance.select(null,cname,null,null,null);
+        if(test.size()!=1){
+            outMap.put("state","4001");
+            return outMap;
+        }
 
-
+        CompetitionMaintenance.add(null,cname,clevel,organizer,hostinstitue);
+        List<Map> rList = CompetitionMaintenance.select(null,cname,clevel,organizer,hostinstitue);
+        if(rList==null || rList.size()!=1){
+            outMap.put("state","4003");
+            return outMap;
+        }
+        if(rList.get(0).get("cno")==null){
+            outMap.put("state","4003");
+            return outMap;
+        }
+        outMap.put("state","200");
+        Map<String, Object> data = new TreeMap<>();
+        data.put("cno",rList.get(0).get("cno"));
+        outMap.put("data",data);
+        outMap.put("state","200");
 
         return outMap;
     }
@@ -133,9 +151,6 @@ public class CompetitionMaintenanceController {
             return outMap;
         }
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
-        for(Object s: rList.get(0).keySet()){
-            System.out.println((String)s);
-        }
         for(int i = 0; i < rList.size(); i += 1){
             Map<String,Object> map = new TreeMap<>();
             map.put("cno",rList.get(i).get("cno"));

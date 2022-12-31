@@ -52,8 +52,30 @@ public class CompetitionMaintenance {
         return compts;
     }
 
-    public static void add(){
+    public static void add(String cno, String cname, String clevel,
+                           String organizer, String hostintitue){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            CompetitionDao competitionDao = new CompetitionDao(sqlSession);
+            competitionDao.add(cno,cname,clevel,organizer,hostintitue);
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public static void update(String cno, String cname, String clevel,
+                           String organizer, String hostintitue){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            CompetitionDao competitionDao = new CompetitionDao(sqlSession);
+            competitionDao.update(cno,cname,clevel,organizer,hostintitue);
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -13,8 +13,15 @@ public class SignUp4CompetitionController {
     @Autowired
     TokenUtil tokenUtil;
     @RequestMapping(value="reg",method=RequestMethod.POST)
-    public Map reg(@RequestBody Map<String,Object> inMap){
+    public Map reg(@RequestBody Map<String,Object> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         Map<String, Object> data = (Map)inMap.get("data");
 
 
@@ -22,8 +29,15 @@ public class SignUp4CompetitionController {
     }
 
     @RequestMapping(value="cancel",method=RequestMethod.POST)
-    public Map cancel(@RequestBody Map<String,String> inMap){
+    public Map cancel(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String teamNo = inMap.get("teamNo");
 
 
@@ -31,8 +45,15 @@ public class SignUp4CompetitionController {
     }
 
     @RequestMapping(value="update",method=RequestMethod.PUT)
-    public Map update(@RequestBody Map<String,Object> inMap){
+    public Map update(@RequestBody Map<String,Object> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         Map<String, Object> data = (Map)inMap.get("data");
 
 
@@ -40,8 +61,15 @@ public class SignUp4CompetitionController {
     }
 
     @RequestMapping(value="auditRegInfo",method=RequestMethod.POST)
-    public Map auditRegInfo(@RequestBody Map<String,String> inMap){
+    public Map auditRegInfo(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String teamNo = inMap.get("teamNo");
         String regAuditResult = inMap.get("regAuditResult");
 

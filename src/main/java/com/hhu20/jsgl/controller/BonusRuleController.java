@@ -1,19 +1,45 @@
 package com.hhu20.jsgl.controller;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.hhu20.jsgl.intermediate.BonusRule;
+import com.hhu20.jsgl.intermediate.PublishedCompetitionMaintenance;
+import com.hhu20.jsgl.util.TokenUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 @RestController
 @RequestMapping(value="/bonusRule",method={RequestMethod.PUT,RequestMethod.POST})
 public class BonusRuleController {
+    @Autowired
+    TokenUtil tokenUtil;
     @RequestMapping(value="getBonusInfo",method=RequestMethod.POST)
-    public Map getBonusInfo(@RequestBody Map<String,String> inMap){
+    public Map getBonusInfo(@RequestBody(required = false) Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+
+        List<Map> rList = BonusRule.selectAll();
+        if(rList==null){
+            //查询失败
+            outMap.put("state","7001");
+            return outMap;
+        }
+        List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
+        for(int i = 0; i < rList.size(); i += 1){
+            Map<String,Object> map = rList.get(i);
+            data.add(map);
+        }
+        outMap.put("state","200");
+        outMap.put("data",data);
 
 
         return outMap;
@@ -45,19 +71,46 @@ public class BonusRuleController {
     }
 
     @RequestMapping(value="delete",method=RequestMethod.POST)
-    public Map delete(@RequestBody Map<String,String> inMap){
+    public Map delete(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
-        String bno = inMap.get("bno");
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+        String clevel = inMap.get("clevel");
 
+        BonusRule.delete(clevel);
+        outMap.put("state","200");
 
         return outMap;
     }
 
-    @RequestMapping(value="getBonusInfoByBno",method=RequestMethod.POST)
-    public Map getBonusInfoByBno(@RequestBody Map<String,String> inMap){
+    @RequestMapping(value="searchBonusRule",method=RequestMethod.POST)
+    public Map getBonusInfoByBno(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
-        String bno = inMap.get("bno");
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+        String clevel = inMap.get("clevel");
 
+        List<Map> rList = BonusRule.select(clevel);
+        if(rList==null){
+            //查询失败
+            outMap.put("state","7001");
+            return outMap;
+        }
+
+        outMap.put("state","200");
+        if(rList.size()>0) {
+            outMap.put("data", rList.get(0));
+        }
 
         return outMap;
     }

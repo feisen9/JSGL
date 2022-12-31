@@ -7,6 +7,7 @@ import com.hhu20.jsgl.pojo.Student;
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -46,4 +47,18 @@ public class UserMaintenance {
         }
         return teachers;
     }
+
+    public static void stuUpdate(String sname, String sno, String major, String sex,
+                                 Date enrollmentYear, String academy){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            StudentDao studentDao = new StudentDao(sqlSession);
+            studentDao.updateStu(sname,sno,major,sex,enrollmentYear,academy);
+            sqlSession.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

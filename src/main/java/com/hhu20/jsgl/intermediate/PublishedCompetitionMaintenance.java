@@ -75,7 +75,7 @@ public class PublishedCompetitionMaintenance {
             SqlSessionTool sqlSessionTool = new SqlSessionTool();
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
             PublishedCompetitionDao publishedCompetitionDao= new PublishedCompetitionDao(sqlSession);
-            publishedCompetitionDao.add(PNO,CNO,PSTATE,R_INFO_COLLECT_TIME,
+            publishedCompetitionDao.add(null,CNO,PSTATE,R_INFO_COLLECT_TIME,
                     A_INFO_COLLECT_TIME,R_INFO_DEADLINE,A_INFO_DEADLINE, SMAXNUM,TMAXNUM);
             sqlSession.close();
         } catch (IOException e) {
