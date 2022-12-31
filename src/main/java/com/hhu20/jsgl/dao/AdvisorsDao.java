@@ -28,7 +28,8 @@ public class AdvisorsDao {
         for (Map advisor:advisors){
             advisorsMapper.update((Float) advisor.get("soefficient"), (String) advisor.get("tno"),teamno);
         }
-
     }
+
+
 
 }
