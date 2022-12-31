@@ -76,7 +76,11 @@ public class MyBatisTestDemo {
 //        userDao.updatePassword("2062810126","jjk");
 //        userDao.deleteOne("2062810126");
 //        List<Map> users = userDao.selectAll();
-//        System.out.println(users);
+//        System.out.println(users.get(0).get("userId"));
+        ///////////////////////////////////
+        AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
+        List<String> tnos = advisorsDao.selectTnoByTeamno(1);
+        System.out.println(tnos.get(0));
         //关闭sqlSession释放资源
         sqlSession.close();
 
