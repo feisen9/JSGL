@@ -5,4 +5,10 @@
 <!-- namespace 命名空间 -->
 <mapper namespace="com.hhu20.jsgl.mapper.TeamMemberMapper">
 
+    <update id="updateTeammembers">
+        update teammember
+        set
+            SCOFFICIENT = #{scofficient}
+        where teamno= #{teamno} and sno = {sno};
+    </update>
 </mapper>

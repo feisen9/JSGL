@@ -4,6 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 命名空间 -->
 <mapper namespace="com.hhu20.jsgl.mapper.AdvisorsMapper">
+    <update id="update">
+        update advisors set
+                            TCOEFFICIENT = #{tcoefficient}
+        where teamno = #{teamno} and tno = #{tno};
+    </update>
 
     <select id="selectTnoByTeamno" resultType="java.lang.String">
         select TNO from advisors where TEAMNO=#{teamno};

@@ -2,6 +2,7 @@ package com.hhu20.jsgl.dao;
 
 import com.hhu20.jsgl.mapper.TeacherMapper;
 import com.hhu20.jsgl.mapper.TeamMapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -17,9 +18,7 @@ public class TeamDao {
     public List<Map> selectAll(){
         return teamMapper.selectAll();
     }
-    public void addAwardInfo(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo) throws Exception
-    {
-        teamMapper.updatePnoandAwardInfo(teamNo,pno,awardInfo);
-
-    }
+    public void updatePnoandAwardInfo(int teamno, int pno, String awardinfo) throws Exception{
+        teamMapper.updatePnoandAwardInfo(teamno,pno,awardinfo);
+    };
 }
