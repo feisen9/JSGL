@@ -45,27 +45,27 @@ public class LoginController {
         return outMap;
     }
 
-    @RequestMapping(value="reg",method=RequestMethod.POST)
-    public Map Register(@RequestBody Map<String,Object> inMap){
-        Map<String, Object> outMap = new TreeMap<>();
-        //debug print
-        String userId = (String)inMap.get("userId");
-        String password = (String)inMap.get("password");
-
-        System.out.println(userId+" "+password);
-
-        if(LoginAndRegister.checkRegister(userId)){
-            //已经存在，失败 state = 4001
-            outMap.put("state","4001");
-        }
-        if(LoginAndRegister.Register(userId, password)){
-            //成功
-            outMap.put("state","200");
-        }else {
-            outMap.put("state", "4003");
-        }
-        return outMap;
-    }
+//    @RequestMapping(value="reg",method=RequestMethod.POST)
+//    public Map Register(@RequestBody Map<String,Object> inMap){
+//        Map<String, Object> outMap = new TreeMap<>();
+//        //debug print
+//        String userId = (String)inMap.get("userId");
+//        String password = (String)inMap.get("password");
+//
+//        System.out.println(userId+" "+password);
+//
+//        if(LoginAndRegister.checkRegister(userId)){
+//            //已经存在，失败 state = 4001
+//            outMap.put("state","4001");
+//        }
+//        if(LoginAndRegister.Register(userId, password)){
+//            //成功
+//            outMap.put("state","200");
+//        }else {
+//            outMap.put("state", "4003");
+//        }
+//        return outMap;
+//    }
 
     @RequestMapping(value="login",method=RequestMethod.POST)
     public Map Login(@RequestBody Map<String,Object> inMap){

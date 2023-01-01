@@ -16,6 +16,12 @@ public class User {
         this.userName = userName;
     }
 
+    public User(String userId, String password, String userType) {
+        this.userId = userId;
+        this.password = password;
+        this.userType = userType;
+    }
+
     @Override
     public String toString() {
         return "User{" +

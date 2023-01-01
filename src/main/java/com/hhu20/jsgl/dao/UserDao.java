@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class UserDao {
     private SqlSession sqlSession;
@@ -32,5 +33,7 @@ public class UserDao {
     public List<Map> selectUserId(String userId){
         return userMapper.selectUserId(FuzzyQueryStr.unilateralFuzzy(userId));
     }
+
+    public void add(User user){userMapper.add(user);}
 
 }

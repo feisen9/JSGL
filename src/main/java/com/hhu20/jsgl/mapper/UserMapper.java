@@ -1,6 +1,6 @@
 package com.hhu20.jsgl.mapper;
 
-import com.hhu20.jsgl.entity.User;
+import com.hhu20.jsgl.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,7 +12,6 @@ public interface UserMapper {
     List<Map> selectAll();
     void updatePassword(@Param("userId") String userid, @Param("password") String password);
     void deleteOne(@Param("userId") String userId);
-
     List<Map> select(String userId);
-
+    void add(User user);
 }
