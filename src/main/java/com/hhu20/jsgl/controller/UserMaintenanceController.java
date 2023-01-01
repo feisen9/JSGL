@@ -43,13 +43,27 @@ public class UserMaintenanceController {
     }
 
     @RequestMapping(value="teaUpdate",method=RequestMethod.PUT)
-    public Map teaUpdate(@RequestBody Map<String,String> inMap){
+    public Map teaUpdate(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+
         String tname = inMap.get("tname");
         String tno = inMap.get("tno");
         String sex = inMap.get("sex");
         String academy = inMap.get("academy");
 
+        UserMaintenance.teaUpdate(tname,tno,sex,academy);
+         /*
+        todo
+        check 更新成功
+         */
+        outMap.put("state","200");
 
         return outMap;
     }
@@ -223,14 +237,23 @@ public class UserMaintenanceController {
     }
 
     @RequestMapping(value="addStu",method=RequestMethod.POST)
-    public Map addStu(@RequestBody Map<String,String> inMap){
+    public Map addStu(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String sname = inMap.get("sname");
         String sno = inMap.get("sno");
         String major = inMap.get("major");
         String sex = inMap.get("sex");
         String enrollmentYear = inMap.get("enrollmentYear");
         String academy = inMap.get("academy");
+
+
 
 
         return outMap;
@@ -249,11 +272,20 @@ public class UserMaintenanceController {
     }
 
     @RequestMapping(value="updatePassword",method=RequestMethod.PUT)
-    public Map updatePassword(@RequestBody Map<String,String> inMap){
+    public Map updatePassword(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
-        String userId = inMap.get("userId");
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+        String userid = inMap.get("userId");
         String password = inMap.get("password");
 
+        UserMaintenance.userUpdate(userid, password);
+        outMap.put("state","200");
 
         return outMap;
     }

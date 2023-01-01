@@ -69,21 +69,34 @@ public class LoginAndRegister {
         return false;
     }
 
+    public static void add(String userId,boolean all){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            UserDao userDao = new UserDao(sqlSession);
+
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static boolean Register(String userId, String password){
         /*
         调用数据库类
         如果插入成功，返回true，否则返回false；
          */
-        int Stu = UserMaintenance.getStuInfoById(userId,false).size();
-        int Tea = UserMaintenance.getTeaInfoById(userId,false).size();
-        if(Stu==Tea){
+        List<Map> Stu = UserMaintenance.getStuInfoById(userId,false);
+        List<Map> Tea = UserMaintenance.getTeaInfoById(userId,false);
+        if(Stu.size()==Tea.size()){
             return false;
         }
-        if(Stu!=1 && Tea!=1){
+        if(Stu.size()!=1 && Tea.size()!=1){
             return false;
         }
         String userType;
-        if(Stu==1){
+        String userName;
+        if(Stu.size()==1){
             userType = "stu";
         }else{
             userType = "tea";
