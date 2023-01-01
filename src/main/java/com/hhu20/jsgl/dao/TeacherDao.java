@@ -26,13 +26,11 @@ public class TeacherDao {
 
     public List<Map> select(String tno){ return teacherMapper.select(tno);};
 
-    public void insertTea(String tno,String tname,String tsex,String academy) throws Exception{
-        //调用DeptDao获取dno
-        DeptDao deptDao = new DeptDao(sqlSession);
-        String dno = deptDao.selectDnameForDno(academy);
-        Teacher teacher = new Teacher(tno,dno,tname,tsex);
-        teacherMapper.insertTea(teacher);
+    public int insertTea(String tno,String tname,String tsex,String academy) throws Exception{
+        Teacher teacher = new Teacher(tno,tname,tsex,academy);
+        int rows = teacherMapper.insertTea(teacher);
         sqlSession.commit();    //提交事务
+        return rows;
     }
 
     public void updateTea(String tno,String tname,String sex,String academy){

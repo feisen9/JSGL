@@ -65,7 +65,7 @@ public class BonusRule {
                 throw new RuntimeException("插入奖金规则时出现未知错误，请联系系统管理员");
             }
             sqlSession.close();
-            return 1;
+            return rows;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

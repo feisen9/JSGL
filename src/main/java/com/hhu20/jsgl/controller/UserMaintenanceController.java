@@ -223,28 +223,52 @@ public class UserMaintenanceController {
     }
 
     @RequestMapping(value="addStu",method=RequestMethod.POST)
-    public Map addStu(@RequestBody Map<String,String> inMap){
+    public Map addStu(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+
         String sname = inMap.get("sname");
         String sno = inMap.get("sno");
         String major = inMap.get("major");
         String sex = inMap.get("sex");
         String enrollmentYear = inMap.get("enrollmentYear");
         String academy = inMap.get("academy");
-
-
+        int rows = UserMaintenance.addStu(sname,sno,major,sex,
+                enrollmentYear,academy);
+        if(rows == 1)
+            outMap.put("state","200");
+        else
+            outMap.put("state","4003");
         return outMap;
     }
 
     @RequestMapping(value="addTea",method=RequestMethod.POST)
-    public Map addTea(@RequestBody Map<String,String> inMap){
+    public Map addTea(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String tname = inMap.get("tname");
         String tno = inMap.get("tno");
         String sex = inMap.get("sex");
         String academy = inMap.get("academy");
+        System.out.println("tname:"+tname);
 
-
+        int rows = UserMaintenance.addTea(tno,tname,sex,academy);
+        if(rows == 1)
+            outMap.put("state","200");
+        else
+            outMap.put("state","4003");
         return outMap;
     }
 
@@ -290,6 +314,18 @@ public class UserMaintenanceController {
         return outMap;
     }
 
+    public static void printtestlist(List<Map> list ){
+        for(int i = 0;i<list.size();i++){
+            Map<String, Object> map = list.get(i);
+            Iterator it = map.keySet().iterator();
+            while (it.hasNext()) {
+                String str = (String) it.next();
+                System.out.print(str+": ");
+                System.out.print(map.get(str)+"\t  ");
+            }
+            System.out.println();
+        }
+    }
 
 
 

@@ -42,9 +42,11 @@ public class StudentDao {
                 student.getSSEX());
         return students;
     }
-    public void insertStu(Student student) throws Exception{
-        studentMapper.insertStu(student);
+    public int insertStu(String sname, String sno , String major, String sex ,
+                         String enrollmentYear , String academy) throws Exception{
+        int rows = studentMapper.insertStu(sname,sno,major,sex,enrollmentYear,academy);
         sqlSession.commit();    //提交事务
+        return rows;
     }
 
     public void updateStu(String sname, String sno , String major, String sex ,
