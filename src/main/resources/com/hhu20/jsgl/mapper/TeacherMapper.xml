@@ -15,6 +15,9 @@
             TSEX = #{tsex}
         where TNO = #{tno}
     </update>
+    <delete id="deleteOne">
+        delete from teacher where tno=#{tno};
+    </delete>
     <select id="selectAll" resultType="java.util.Map">
         select * from teainfo;
     </select>

@@ -38,4 +38,7 @@ public class TeacherDao {
         List<String> dno = deptDao.selectDnameForDno(academy);
         teacherMapper.updateTea(tname,tno,sex,dno.get(0));
     }
+    public int deleteOne(String tno){
+        return teacherMapper.deleteOne(tno);
+    }
 }

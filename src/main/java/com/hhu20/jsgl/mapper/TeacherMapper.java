@@ -13,4 +13,5 @@ public interface TeacherMapper {
     List<Map> select(String tno);
     int insertTea(Teacher teacher);
     void updateTea(@Param("tname") String tname, @Param("tno") String tno, @Param("tsex") String tsex, @Param("dno") String dno);
+    int deleteOne(String tno);
 }
