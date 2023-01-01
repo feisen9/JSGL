@@ -5,9 +5,7 @@
 <!-- namespace 命名空间 -->
 <mapper namespace="com.hhu20.jsgl.mapper.TeacherMapper">
     <insert id="insertTea">
-#         insert into teacher(tno, dno, tname, tsex)
-#         values (#{TNO},#{DNO},#{TNAME},#{TSEX});
-        call insert_tea(#{tno},#{tname},#{tsex},#{academy});
+        call insert_tea(#{TNO},#{TNAME},#{TSEX},#{ACADEMY});
     </insert>
     <update id="updateTea">
         update teacher

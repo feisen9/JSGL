@@ -8,6 +8,8 @@ public class Student {
     private String SNAME       ;
     private String SSEX        ;
     private Date ENROLLMENTYEAR;
+    private String ACADEMY         ;
+    private String MAJOR         ;
 
     @Override
     public String toString() {
@@ -17,6 +19,8 @@ public class Student {
                 ", SNAME='" + SNAME + '\'' +
                 ", SSEX='" + SSEX + '\'' +
                 ", ENROLLMENTYEAR=" + ENROLLMENTYEAR +
+                ", ACADEMY=" + ACADEMY +
+                ", MAJOR=" + MAJOR +
                 '}';
     }
 
@@ -58,5 +62,21 @@ public class Student {
 
     public void setENROLLMENTYEAR(Date ENROLLMENTYEAR) {
         this.ENROLLMENTYEAR = ENROLLMENTYEAR;
+    }
+
+    public String getACADEMY() {
+        return ACADEMY;
+    }
+
+    public void setACADEMY(String ACADEMY) {
+        this.ACADEMY = ACADEMY;
+    }
+
+    public String getMAJOR() {
+        return MAJOR;
+    }
+
+    public void setMAJOR(String MAJOR) {
+        this.MAJOR = MAJOR;
     }
 }

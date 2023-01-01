@@ -18,8 +18,8 @@ public interface StudentMapper {
     List<Map> selectByCondition(@Param("sno") String sno, @Param("mno") String mno,
                                     @Param("sname") String sname, @Param("ssex") String ssex);
 
-    void insertStu(@Param("sno") String sno,@Param("sname") String sname,@Param("ssex") String ssex,
-                   @Param("enrollyear") Date enrollyear, @Param("academy") String academy, @Param("major") String major);
+    int insertStu(String SNAME, String SNO , String MAJOR, String SSEX ,
+                  String ENROLLMENTYEAR , String ACADEMY);
 
     void updateStu(@Param("sno") String sno,
                    @Param("mno") String mno,
