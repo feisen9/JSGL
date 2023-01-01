@@ -9,6 +9,11 @@
         update teammember
         set
             SCOFFICIENT = #{scofficient}
-        where teamno= #{teamno} and sno = {sno};
+        where teamno= #{teamno} and sno = #{sno};
     </update>
+    <select id="selectByTeamno" resultType="java.util.Map">
+        select *
+        from teammember natural join student
+        where teamno = #{teamno}
+    </select>
 </mapper>

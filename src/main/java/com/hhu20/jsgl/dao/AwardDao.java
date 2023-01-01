@@ -54,4 +54,9 @@ public class AwardDao {
     public List<Map> searchAward(int pno,String cname,String awardInfo,String sno,String sname,String tno,String tname,String awardAuditResult){
         return awardMapper.searchAward(pno, FuzzyQueryStr.bilateralFuzzy(cname), awardInfo, sno, FuzzyQueryStr.bilateralFuzzy(sname), tno, FuzzyQueryStr.bilateralFuzzy(tname), awardAuditResult);
     }
+
+    //获取所有奖金信息
+//    public List<Map> getAwardInfo(){
+//        awardMapper
+//    }
 }

@@ -19,4 +19,7 @@ public class TeamMemberDao {
             teamMemberMapper.updateTeammembers((Float) teamMember.get("sofficient"), (String) teamMember.get("sno"),teamNo);
         }
     }
+//    public List<Map> selectByTeamno(int teamno){
+//
+//    }
 }

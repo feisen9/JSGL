@@ -13,5 +13,10 @@
     <select id="selectTnoByTeamno" resultType="java.lang.String">
         select TNO from advisors where TEAMNO=#{teamno};
     </select>
+    <select id="selectByTeamno" resultType="java.util.Map">
+        select tno,tname,tcoefficient
+        from advisors natural join teacher
+        where teamno = #{teamno}
+    </select>
 
 </mapper>

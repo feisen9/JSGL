@@ -6,8 +6,9 @@
 <mapper namespace="com.hhu20.jsgl.mapper.StudentMapper">
 
     <insert id="insertStu">
-       insert into student(sno, mno, sname, ssex, enrollmentyear)
-       VALUES (#{SNO},#{MNO},#{SNAME},#{SSEX},#{ENROLLMENTYEAR});
+#        insert into student(sno, mno, sname, ssex, enrollmentyear)
+#        VALUES (#{SNO},#{MNO},#{SNAME},#{SSEX},#{ENROLLMENTYEAR});
+        call insert_stu(#{sno},#{sname},#{ssex},#{enrollyear},#{academy},#{major});
     </insert>
     <update id="updateStu">
         update student

@@ -29,6 +29,9 @@ public class AdvisorsDao {
             advisorsMapper.update((Float) advisor.get("soefficient"), (String) advisor.get("tno"),teamno);
         }
     }
+    public List<Map> selectByTeamno(int teamno){ //根据teamno查tno,tname,tcoefficient
+        return advisorsMapper.selectByTeamno(teamno);
+    }
 
 
 

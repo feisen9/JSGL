@@ -42,16 +42,14 @@ public class StudentDao {
                 student.getSSEX());
         return students;
     }
-    public void insertStu(Student student) throws Exception{
-        studentMapper.insertStu(student);
+    public void insertStu(String sno,String sname,String ssex,Date enrollyear, String academy, String major) throws Exception{
+        studentMapper.insertStu(sno, sname, ssex, enrollyear, academy, major);
         sqlSession.commit();    //提交事务
     }
 
     public void updateStu(String sname, String sno , String major, String sex ,
                           Date enrollmentYear , String academy) throws Exception{
-        //通过DeptDao查出acdemy对应的dno
-        DeptDao deptDao = new DeptDao(sqlSession);
-        String dno = deptDao.selectDnameForDno(academy);
+
         //通过MajorDao查出major对应的mno
         MajorDao majorDao = new MajorDao(sqlSession);
         String mno = majorDao.selectMnameForMno(major);
