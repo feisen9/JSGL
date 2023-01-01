@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface Part5Mapper {
+
+    List<Map> checkTeam(String teamno);
+    void  updateTeam(String teamno, String  pno, String teamname);
+    void  deleteStuTea(String teamno);
     void teamInsert(String teamname, String pno, Date registertime);
 
     void teammemberInsert(String sno, String teamno);

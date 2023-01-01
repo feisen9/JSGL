@@ -8,22 +8,72 @@ import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.*;
-
 public class SignUp4Competition {
 
-//    public List<Map> getRegInfo(){
-//        List<Map> regs;
-//        try {
-//            SqlSessionTool sqlSessionTool = new SqlSessionTool();
-//            SqlSession sqlSession = sqlSessionTool.getSqlSession();
-//             publishedCompetitionDao= new PublishedCompetitionDao(sqlSession);
-//            pcompts = publishedCompetitionDao.selectAll();
-//            sqlSession.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return pcompts;
-//    }
+    public static Map update(String teamNo, String teamname, String pno, List<Map> teamMembers, List<Map> advisors){
+        Map<String, String> outMap = new TreeMap<>();
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            Part5 part5 = new Part5(sqlSession);
+            TeacherDao teacherDao = new TeacherDao(sqlSession);
+            StudentDao studentDao = new StudentDao(sqlSession);
+
+            for(Map stu: teamMembers){
+                String sno = (String) stu.get("sno");
+                String sname = (String) stu.get("sname");
+                List<Map> rList = studentDao.select(sno);
+                if(rList.size()!=1){
+                    System.out.println("队员不存在");
+                    sqlSession.close();
+                    outMap.put("state","4004");
+                    return outMap;
+                }
+                if(!rList.get(0).get("sname").equals(sname)){
+                    System.out.println("队员信息有误");
+                    sqlSession.close();
+                    outMap.put("state","4004");
+                    return outMap;
+                }
+            }
+            for(Map tea: advisors){
+                String tno = (String) tea.get("tno");
+                String tname = (String) tea.get("tname");
+                List<Map> rList = teacherDao.select(tno);
+                if(rList.size()!=1){
+                    System.out.println("指导老师不存在");
+                    sqlSession.close();
+                    outMap.put("state","4004");
+                    return outMap;
+                }
+            }
+            List<Map> rList = part5.checkTeam(teamNo);
+            if(rList.size()!=1){
+                System.out.println("队伍不存在");
+                sqlSession.close();
+                outMap.put("state","4004");
+                return outMap;
+            }
+
+            part5.updateTeam(teamNo,pno,teamname);
+            part5.deleteStuTea(teamNo);
+
+            for(Map stu : teamMembers){
+                String sno = (String) stu.get("sno");
+                part5.teammemberInsert(sno,teamNo);
+            }
+            for(Map tea: advisors){
+                String tno = (String) tea.get("tno");
+                part5.teammemberInsert(tno,teamNo);
+            }
+
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        outMap.put("state","200");
+        return outMap;
+    }
 
     public static void updateTeamR(String teamno, String r_audit_result){
         try {
