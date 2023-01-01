@@ -20,31 +20,33 @@ public class BonusRuleDao {
         return outMap;
     }
 
-    public List<Map> update(String bno, String s_firstprize_amount, String s_secondprize_amount, String s_thirdprize_amount,
-                            String s_noprize_amount, String t_firstprize_amount, String t_secondprize_amount, String t_thirdprize_amount,
-                            String t_noprize_amount){
-        List<Map> outMap = bonusRuleMapper.update(bno, s_firstprize_amount, s_secondprize_amount, s_thirdprize_amount,
-                s_noprize_amount, t_firstprize_amount, t_secondprize_amount, t_thirdprize_amount,
-                t_noprize_amount);
+    public List<Map> update(String clevel, String stu_1, String stu_2, String stu_3,
+                            String stu_no, String stu_t,  String tea_1, String tea_2, String tea_3,
+                            String tea_no, String tea_t,String team_1, String team_2, String team_3,
+                            String team_no, String team_t){
+        List<Map> outMap = bonusRuleMapper.update(clevel, stu_1, stu_2, stu_3,stu_no,stu_t,
+                tea_1, tea_2, tea_3,tea_no,tea_t,
+                team_1, team_2, team_3,team_no,team_t);
         return outMap;
     }
 
-    public List<Map> add(String bno, String s_firstprize_amount, String s_secondprize_amount, String s_thirdprize_amount,
-                         String s_noprize_amount, String t_firstprize_amount, String t_secondprize_amount, String t_thirdprize_amount,
-                         String t_noprize_amount){
-        List<Map> outMap = bonusRuleMapper.add(bno, s_firstprize_amount, s_secondprize_amount, s_thirdprize_amount,
-                s_noprize_amount, t_firstprize_amount, t_secondprize_amount, t_thirdprize_amount,
-                t_noprize_amount);
+    public int add(String clevel, String stu_1, String stu_2, String stu_3,
+                         String stu_no, String stu_t,  String tea_1, String tea_2, String tea_3,
+                         String tea_no, String tea_t,String team_1, String team_2, String team_3,
+                         String team_no, String team_t){
+        int outMap = bonusRuleMapper.add(clevel, stu_1, stu_2, stu_3,stu_no,stu_t,
+                tea_1, tea_2, tea_3,tea_no,tea_t,
+                team_1, team_2, team_3,team_no,team_t);
         return outMap;
     }
 
-    public List<Map> delete(String bno){
-        List<Map> outMap = bonusRuleMapper.delete(bno);
+    public List<Map> delete(String clevel){
+        List<Map> outMap = bonusRuleMapper.delete(clevel);
         return outMap;
     }
 
-    public List<Map> select(String bno){
-        List<Map> outMap = bonusRuleMapper.select(bno);
+    public List<Map> select(String clevel){
+        List<Map> outMap = bonusRuleMapper.select(clevel);
         return outMap;
     }
 }

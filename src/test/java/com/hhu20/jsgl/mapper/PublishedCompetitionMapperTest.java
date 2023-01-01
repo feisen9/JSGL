@@ -24,7 +24,7 @@ class PublishedCompetitionMapperTest {
     @Test
     void selectAll() throws IOException {
         List<Map> list = publishedCompetitionDao.selectAll();
-        printlist(list);
+        printtestlist(list);
         session.close();
     }
 
@@ -50,11 +50,11 @@ class PublishedCompetitionMapperTest {
     @Test
     void selectByCondition() {
         List<Map> list = publishedCompetitionDao.selectByCondition("","","报名结束","2022-8-10","2022-8-10","2022-10-10","2022-10-10","5","3");
-        printlist(list);
+        printtestlist(list);
         session.close();
     }
 
-    void printlist(List<Map> list ){
+    public static void printtestlist(List<Map> list ){
         for(int i = 0;i<list.size();i++){
             Map<String, Object> map = list.get(i);
             Iterator it = map.keySet().iterator();

@@ -10,33 +10,40 @@
     </select>
 
     <select id="select"  resultType="java.util.Map">
-        select * from BonusRule where bno=#{bno};
+        select * from BonusRule where clevel=#{clevel};
     </select>
 
     <select id="delete"  resultType="java.util.Map">
-        delete from BonusRule where bno=#{bno};
+        delete from BonusRule where clevel=#{clevel};
     </select>
 
     <select id="update" resultType="java.util.Map">
         update BonusRule
-        set s_firstprize_amount = #{s_firstprize_amount},
-            s_secondprize_amount = #{s_secondprize_amount},
-            s_thirdprize_amount = #{s_thirdprize_amount},
-            s_noprize_amount = #{s_noprize_amount},
-            t_firstprize_amount = #{t_firstprize_amount},
-            t_secondprize_amount = #{t_secondprize_amount},
-            t_thirdprize_amount = #{t_thirdprize_amount},
-            t_noprize_amount = #{t_noprize_amount}
-        where bno = #{bno};
+        set stu_1 = #{stu_1},
+            stu_2 = #{stu_2},
+            stu_3 = #{stu_3},
+            stu_no = #{stu_no},
+            stu_t = #{stu_t},
+            tea_1 = #{tea_1},
+            tea_2 = #{tea_2},
+            tea_3 = #{tea_3},
+            tea_no = #{tea_no},
+            tea_t = #{tea_t},
+            team_1 = #{team_1},
+            team_2 = #{team_2},
+            team_3 = #{team_3},
+            team_no = #{team_no},
+            team_t = #{team_t}
+        where clevel = #{clevel};
     </select>
 
-    <select id="add"  resultType="java.util.Map">
-        insert into BonusRule(bno, s_firstprize_amount, s_secondprize_amount, s_thirdprize_amount,
-                              s_noprize_amount, t_firstprize_amount, t_secondprize_amount, t_thirdprize_amount,
-                              t_noprize_amount)
-        values(#{bno}, #{s_firstprize_amount}, #{s_secondprize_amount}, #{s_thirdprize_amount},
-                  #{s_noprize_amount}, #{t_firstprize_amount}, #{t_secondprize_amount}, #{t_thirdprize_amount},
-               #{t_noprize_amount})
-    </select>
+    <insert id="add">
+        insert into BonusRule(clevel, stu_1, stu_2, stu_3,stu_no,stu_t,
+                              tea_1, tea_2, tea_3,tea_no,tea_t,
+                              team_1, team_2, team_3,team_no,team_t)
+        values(#{clevel}, #{stu_1}, #{stu_2}, #{stu_3}, #{stu_no}, #{stu_t},
+               #{tea_1}, #{tea_2}, #{tea_3}, #{tea_no}, #{tea_t},
+               #{team_1}, #{team_2}, #{team_3}, #{team_no}, #{team_t})
+    </insert>
 
 </mapper>

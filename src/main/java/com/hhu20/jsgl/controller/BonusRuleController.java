@@ -46,27 +46,69 @@ public class BonusRuleController {
     }
 
     @RequestMapping(value="update",method=RequestMethod.PUT)
-    public Map update(@RequestBody Map<String, Object> inMap){
+    public Map update(@RequestBody Map<String, String> inMap){
         Map<String, Object> outMap = new TreeMap<>();
-//        String data = inMap.get("data");
-//
+        String clevel = inMap.get("clevel");
+        String stu_1 = inMap.get("stu_1");
+        String stu_2 = inMap.get("stu_2");
+        String stu_3 = inMap.get("stu_3");
+        String stu_no = inMap.get("stu_no");
+        String stu_t = inMap.get("stu_t");
+        String tea_1 = inMap.get("tea_1");
+        String tea_2 = inMap.get("tea_2");
+        String tea_3 = inMap.get("tea_3");
+        String tea_no = inMap.get("tea_no");
+        String tea_t = inMap.get("tea_t");
+        String team_1 = inMap.get("team_1");
+        String team_2 = inMap.get("team_2");
+        String team_3 = inMap.get("team_3");
+        String team_no = inMap.get("team_no");
+        String team_t = inMap.get("team_t");
+
+        BonusRule.update(clevel, stu_1, stu_2, stu_3,stu_no,stu_t,
+                tea_1, tea_2, tea_3,tea_no,tea_t,
+                team_1, team_2, team_3,team_no,team_t);
+
+        outMap.put("state","200");
 
         return outMap;
     }
 
     @RequestMapping(value="add",method=RequestMethod.POST)
-    public Map add(@RequestBody Map<String,String> inMap){
+    public Map add(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
-        String stuFirstPrize = inMap.get("stuFirstPrize");
-        String stuSecondPrize = inMap.get("stuSecondPrize");
-        String stuThirdPrize = inMap.get("stuThirdPrize");
-        String stuNoPrize = inMap.get("stuNoPrize");
-        String teaFirstPrize = inMap.get("teaFirstPrize");
-        String teaSecondPrize = inMap.get("teaSecondPrize");
-        String teaThirdPrize = inMap.get("teaThirdPrize");
-        String teaNoPrize = inMap.get("teaNoPrize");
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+        String clevel = inMap.get("clevel");
+        String stu_1 = inMap.get("stu_1");
+        String stu_2 = inMap.get("stu_2");
+        String stu_3 = inMap.get("stu_3");
+        String stu_no = inMap.get("stu_no");
+        String stu_t = inMap.get("stu_t");
+        String tea_1 = inMap.get("tea_1");
+        String tea_2 = inMap.get("tea_2");
+        String tea_3 = inMap.get("tea_3");
+        String tea_no = inMap.get("tea_no");
+        String tea_t = inMap.get("tea_t");
+        String team_1 = inMap.get("team_1");
+        String team_2 = inMap.get("team_2");
+        String team_3 = inMap.get("team_3");
+        String team_no = inMap.get("team_no");
+        String team_t = inMap.get("team_t");
 
+        int rows = BonusRule.add(clevel, stu_1, stu_2, stu_3,stu_no,stu_t,
+                tea_1, tea_2, tea_3,tea_no,tea_t,
+                team_1, team_2, team_3,team_no,team_t);
 
+        if(rows == 1)
+            outMap.put("state","200");
+        else
+            outMap.put("state","4003");
         return outMap;
     }
 
