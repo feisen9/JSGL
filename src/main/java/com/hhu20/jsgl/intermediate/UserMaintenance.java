@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.hhu20.jsgl.intermediate;
 
 import com.hhu20.jsgl.dao.SqlSessionTool;
@@ -91,6 +90,57 @@ public class UserMaintenance {
                 throw new RuntimeException("插入学生时出现未知错误，请联系系统管理员");
             sqlSession.close();
             return  rows;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public static void teaUpdate(String tname, String tno,String sex, String academy){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            TeacherDao teacherDao = new TeacherDao(sqlSession);
+            teacherDao.updateTea(tno,tname,sex,academy);
+            sqlSession.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void stuAdd(String sname, String sno, String major, String sex,
+                              Date enrollmentYear, String academy){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            StudentDao studentDao = new StudentDao(sqlSession);
+            Student student = new Student();
+
+            sqlSession.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void teaAdd(String tname, String tno,String sex, String academy){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            TeacherDao teacherDao = new TeacherDao(sqlSession);
+
+            sqlSession.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void userUpdate(String userId, String password){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            UserDao userDao = new UserDao(sqlSession);
+            userDao.updatePassword(userId, password);
+            sqlSession.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

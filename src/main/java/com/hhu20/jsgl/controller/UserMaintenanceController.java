@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.hhu20.jsgl.controller;
 
 import com.hhu20.jsgl.intermediate.LoginAndRegister;
