@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 -->
+
+<mapper namespace="com.hhu20.jsgl.mapper.Part5Mapper">
+    <insert id="teamInsert">
+        insert into team(teamname, pno, registertime ) values(#{teamname}, #{pno}, #{registertime});
+    </insert>
+
+    <insert id="teammemberInsert">
+        insert into teammember(sno, teamno) values(#{sno}, #{teamno});
+    </insert>
+
+    <insert id="advisorInsert">
+        insert into teammember(tno, teamno) values(#{tno}, #{teamno});
+    </insert>
+
+    <select id="selectTeamCT" resultType="java.util.Map">
+        call selectTeamCT(#{pno}, #{cname}, #{sno} , #{sname}, #{tno} , #{tname} , #{regAuditResult})
+    </select>
+
+    <select id="selectTStu" resultType="java.util.Map">
+        call selectTStu(#{teamno})
+    </select>
+
+    <select id="selectTTea" resultType="java.util.Map">
+        call selectTTea(#{teamno})
+    </select>
+
+    <select id="teamSelectN" resultType="java.util.Map">
+        select *
+        from team
+        where 1=1
+        <if test="teamno != null and teamno != ''">
+            and teamno like #{teamno}
+        </if>
+        <if test="pno  != null and pno != ''">
+            and pno  like #{pno}
+        </if>
+        <if test="teamname != null and teamname != ''">
+            and teamname like #{teamname}
+        </if>
+        <if test="registertime != null and registertime != ''">
+            and registertime = #{registertime}
+        </if>
+        <if test="r_audit_result != null and r_audit_result  != ''">
+            and  r_audit_result = #{r_audit_result}
+        </if>
+        <if test="a_audit_result != null and  a_audit_result!= ''">
+            and  a_audit_result = #{a_audit_result}
+        </if>
+    </select>
+
+    <select id="teammemberSelectN" resultType="java.util.Map">
+        select * from teammember where 1=1
+        <if test="sno != null and sno != ''">
+            and sno like #{sno}
+        </if>
+        <if test="teamno != null and teamno != ''">
+            and teamno like #{teamno}
+        </if>
+    </select>
+
+    <select id="advisorSelectN" resultType="java.util.Map">
+        select * from advisors where 1=1
+        <if test="tno != null and tno != ''">
+            and tno like #{tno}
+        </if>
+        <if test="teamno != null and teamno != ''">
+            and teamno like #{teamno}
+        </if>
+    </select>
+
+    <update id="teamUpdate">
+
+    </update>
+
+    <delete id="deleteTeam">
+        call deleteteam(#{teamno})
+    </delete>
+
+    <update id="updateTeamR">
+        update team
+        set r_audit_result = #{r_audit_result}
+        where teamno = #{teamno}
+    </update>
+</mapper>
