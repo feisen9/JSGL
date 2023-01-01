@@ -12,7 +12,7 @@
         where teamno= #{teamno} and sno = #{sno};
     </update>
     <select id="selectByTeamno" resultType="java.util.Map">
-        select *
+        select sno,sname,scofficient
         from teammember natural join student
         where teamno = #{teamno}
     </select>

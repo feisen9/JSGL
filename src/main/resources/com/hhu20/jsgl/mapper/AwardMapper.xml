@@ -4,6 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 命名空间 -->
 <mapper namespace="com.hhu20.jsgl.mapper.AwardMapper">
+    <update id="deleteAwardInfo">
+        update team set awardinfo = null where teamno=#{teamno};
+    </update>
 
 
     <select id="searchAward" resultType="java.util.Map">
@@ -53,5 +56,8 @@
             )
         </if>
 
+    </select>
+    <select id="getAwardInfo" resultType="java.util.Map">
+        select teamno,pno,awardinfo from team;
     </select>
 </mapper>

@@ -56,7 +56,21 @@ public class AwardDao {
     }
 
     //获取所有奖金信息
-//    public List<Map> getAwardInfo(){
-//        awardMapper
-//    }
+    public List<Map> getAwardInfo(){
+        List<Map> outMap = awardMapper.getAwardInfo();
+        TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
+        AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
+        //后端查询队员和指导老师的赋分系数，增加两个字段
+        for(int i=0;i<outMap.size();i++){
+            Map temp = outMap.get(i);
+            List<Map> teamMembers = teamMemberDao.selectByTeamno((Integer) temp.get("teamno"));
+            temp.put("teamMembers",teamMembers);
+            List<Map> advisors = advisorsDao.selectByTeamno((Integer) temp.get("teamno"));
+            temp.put("advisors",advisors);
+        }
+        return outMap;
+    }
+    public void deleteAwardInfo(int teamno){
+        awardMapper.deleteAwardInfo(teamno);
+    }
 }
