@@ -29,6 +29,16 @@ public class AdvisorsDao {
             advisorsMapper.update((Float) advisor.get("soefficient"), (String) advisor.get("tno"),teamno);
         }
     }
+    public List<Map> selectByTeamno(int teamno){ //根据teamno查tno,tname,tcoefficient
+        List<Map> outMap = advisorsMapper.selectByTeamno(teamno);
+        //改变键名与前端对应
+        for(int i=0;i<outMap.size();i++){
+            float sofficient = (float) outMap.get(i).get("tcoefficient");
+            outMap.get(0).remove("tcoefficient");
+            outMap.get(0).put("sofficient",sofficient);
+        }
+        return outMap;
+    }
 
 
 

@@ -8,5 +8,5 @@ import java.util.Map;
 public interface DeptMapper {
     List<Dept> selectDept();
     List<Map> selectAll();
-    String selectDnameForDno(String dname);
+    List<String> selectDnameForDno(String dname);
 }

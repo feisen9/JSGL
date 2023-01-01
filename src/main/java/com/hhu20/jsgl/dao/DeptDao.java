@@ -17,8 +17,8 @@ public class DeptDao {
     public List<Map> selectAll(){
         return deptMapper.selectAll();
     }
-    public String selectDnameForDno(String dname){
-        String dno = deptMapper.selectDnameForDno(dname);
-        return dno;
+    public List<String> selectDnameForDno(String dname){
+        List<String> dnos = deptMapper.selectDnameForDno(dname);
+        return dnos;
     }
 }

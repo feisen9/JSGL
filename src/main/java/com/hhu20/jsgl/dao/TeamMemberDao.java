@@ -19,4 +19,15 @@ public class TeamMemberDao {
             teamMemberMapper.updateTeammembers((Float) teamMember.get("sofficient"), (String) teamMember.get("sno"),teamNo);
         }
     }
+    public List<Map> selectByTeamno(int teamno){
+        List<Map> outMap = teamMemberMapper.selectByTeamno(teamno);
+        //改变键名与前端对应
+        for(int i=0;i<outMap.size();i++){
+            float sofficient = (float) outMap.get(i).get("scofficient");
+            outMap.get(0).remove("scofficient");
+            outMap.get(0).put("sofficient",sofficient);
+        }
+        return outMap;
+
+    }
 }

@@ -3,8 +3,10 @@ package com.hhu20.jsgl.intermediate;
 import com.hhu20.jsgl.dao.SqlSessionTool;
 import com.hhu20.jsgl.dao.StudentDao;
 import com.hhu20.jsgl.dao.TeacherDao;
+
 import com.hhu20.jsgl.dao.UserDao;
 import com.hhu20.jsgl.pojo.Student;
+
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
@@ -62,6 +64,39 @@ public class UserMaintenance {
         }
     }
 
+    public static int addStu(String sname, String sno, String major, String sex,
+                             String enrollmentYear, String academy){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            StudentDao studentDao = new StudentDao(sqlSession);
+            int rows = studentDao.insertStu(sname,sno,major,sex,enrollmentYear,academy);
+            if(rows!=1)
+                throw new RuntimeException("插入学生时出现未知错误，请联系系统管理员");
+            sqlSession.close();
+            return  rows;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static int addTea(String tno,String tname, String sex, String academy){
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            TeacherDao teacherDao = new TeacherDao(sqlSession);
+            int rows = teacherDao.insertTea(tno,tname,sex,academy);
+            if(rows!=1)
+                throw new RuntimeException("插入学生时出现未知错误，请联系系统管理员");
+            sqlSession.close();
+            return  rows;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
     public static void teaUpdate(String tname, String tno,String sex, String academy){
         try {
             SqlSessionTool sqlSessionTool = new SqlSessionTool();
@@ -74,8 +109,7 @@ public class UserMaintenance {
         }
     }
 
-    public static void stuAdd(String sname, String sno, String major, String sex,
-                                 Date enrollmentYear, String academy){
+    public static void stuAdd(String sname, String sno, String major, String sex, Date enrollmentYear, String academy){
         try {
             SqlSessionTool sqlSessionTool = new SqlSessionTool();
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
@@ -113,18 +147,4 @@ public class UserMaintenance {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

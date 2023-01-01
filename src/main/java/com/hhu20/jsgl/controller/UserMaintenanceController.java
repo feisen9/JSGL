@@ -246,12 +246,20 @@ public class UserMaintenanceController {
             outMap.put("state","5000");
             return outMap;
         }
+
         String sname = inMap.get("sname");
         String sno = inMap.get("sno");
         String major = inMap.get("major");
         String sex = inMap.get("sex");
         String enrollmentYear = inMap.get("enrollmentYear");
         String academy = inMap.get("academy");
+
+        int rows = UserMaintenance.addStu(sname,sno,major,sex,
+                enrollmentYear,academy);
+        if(rows == 1)
+            outMap.put("state","200");
+        else
+            outMap.put("state","4003");
 
 
 
@@ -324,5 +332,5 @@ public class UserMaintenanceController {
 
 
 
-
 }
+
