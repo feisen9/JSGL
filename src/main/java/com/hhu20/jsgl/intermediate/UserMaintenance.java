@@ -3,6 +3,10 @@ package com.hhu20.jsgl.intermediate;
 import com.hhu20.jsgl.dao.SqlSessionTool;
 import com.hhu20.jsgl.dao.StudentDao;
 import com.hhu20.jsgl.dao.TeacherDao;
+
+import com.hhu20.jsgl.dao.UserDao;
+import com.hhu20.jsgl.pojo.Student;
+
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
@@ -90,5 +94,19 @@ public class UserMaintenance {
             throw new RuntimeException(e);
         }
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

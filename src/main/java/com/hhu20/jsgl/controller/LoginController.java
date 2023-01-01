@@ -77,12 +77,12 @@ public class LoginController {
         System.out.println(userId+" "+password);
 
 
-//        if(!LoginAndRegister.checkRegister(userId)){
-//            //用户不存在，失败 state = 4004
-//            outMap = new TreeMap<>();
-//            outMap.put("state","4004");
-//            return outMap;
-//        }
+        if(!LoginAndRegister.checkRegister(userId)){
+            //用户不存在，失败 state = 4004
+            outMap = new TreeMap<>();
+            outMap.put("state","4004");
+            return outMap;
+        }
 
         outMap = LoginAndRegister.Login(userId, password);
         if((String)outMap.get("state")=="200"){

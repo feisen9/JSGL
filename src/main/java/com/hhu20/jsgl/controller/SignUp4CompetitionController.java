@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/teams",method={RequestMethod.PUT,RequestMethod.POST})
@@ -23,7 +24,14 @@ public class SignUp4CompetitionController {
             return outMap;
         }
         Map<String, Object> data = (Map)inMap.get("data");
+        String teamName = (String) data.get("teamName");
+        String pno = (String) data.get("pno");
+        List<Map> teamMembers = (List<Map>) data.get("teamMembers");
+        List<Map> advisors = (List<Map>) data.get("advisors");
 
+        /*
+        缺少database支持
+         */
 
         return outMap;
     }
