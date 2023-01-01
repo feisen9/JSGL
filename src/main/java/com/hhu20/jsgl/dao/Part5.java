@@ -15,6 +15,16 @@ public class Part5 {
         part5Mapper = sqlSession.getMapper(Part5Mapper.class);
     }
 
+    public List<Map> checkTeam(String teamno){
+        return part5Mapper.checkTeam(teamno);
+    }
+    public void  updateTeam(String teamno, String  pno, String teamname){
+        part5Mapper.updateTeam(teamno,pno,teamname);
+    }
+    public void  deleteStuTea(String teamno){
+        part5Mapper.deleteStuTea(teamno);
+    }
+
     public List<Map> teamSelectN(String teamno, String pno, String teamname, Date registertime, String r_audit_result,
                                  String a_audit_result){
         return part5Mapper.teamSelectN(teamno,pno,teamname,registertime,r_audit_result,a_audit_result);

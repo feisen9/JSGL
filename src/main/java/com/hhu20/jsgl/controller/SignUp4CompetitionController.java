@@ -74,10 +74,8 @@ public class SignUp4CompetitionController {
         List<Map> teamMembers = (List<Map>) data.get("teamMembers");
         List<Map> advisors = (List<Map>) data.get("advisors");
 
-
-
-
-        return outMap;
+        Map<String,String> rMap = SignUp4Competition.update(teamNo,teamName,pno,teamMembers,advisors);
+        return rMap;
     }
 
     @RequestMapping(value="auditRegInfo",method=RequestMethod.POST)

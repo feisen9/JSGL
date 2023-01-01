@@ -26,5 +26,7 @@ public interface StudentMapper {
                    @Param("sname") String sname,
                    @Param("ssex") String ssex,
                    @Param("enrollmentyear") Date enrollmentyear);
+
+    int deleteOne(String sno);
 }
 

@@ -5,6 +5,18 @@
 <!-- namespace 命名空间 -->
 
 <mapper namespace="com.hhu20.jsgl.mapper.Part5Mapper">
+    <select id="checkTeam" resultType="java.util.Map">
+        select teamno from team where teamno = #{teamno}
+    </select>
+
+    <update id="updateTeam">
+        call updateTeam(#{teamno}, #{pno}, #{teamname})
+    </update>
+
+    <delete id="deleteStuTea">
+        call deleteStuTea(#{teamno})
+    </delete>
+
     <insert id="teamInsert">
         insert into team(teamname, pno, registertime ) values(#{teamname}, #{pno}, #{registertime});
     </insert>

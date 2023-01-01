@@ -57,4 +57,8 @@ public class StudentDao {
         String mno = majorDao.selectMnameForMno(major);
         studentMapper.updateStu(sno,mno,sname,sex,enrollmentYear);
     }
+
+    public int deleteOne(String sno){
+        return studentMapper.deleteOne(sno);
+    }
 }

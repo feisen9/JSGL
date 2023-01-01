@@ -17,6 +17,9 @@
             enrollmentyear = #{enrollmentyear}
         where sno=#{sno}
     </update>
+    <delete id="deleteOne">
+        delete from student where sno=#{sno};
+    </delete>
 
     <select id="selectAll" resultType="java.util.Map">
         select * from stuinfo;
