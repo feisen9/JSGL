@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.hhu20.jsgl.intermediate;
 
 import com.hhu20.jsgl.dao.SqlSessionTool;
@@ -95,18 +96,4 @@ public class UserMaintenance {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
