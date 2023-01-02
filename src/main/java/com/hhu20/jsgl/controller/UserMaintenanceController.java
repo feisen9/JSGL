@@ -29,7 +29,10 @@ public class UserMaintenanceController {
         String sno = (String) inMap.get("sno");
         String major = (String) inMap.get("major");
         String sex = (String) inMap.get("sex");
-        Date enrollmentYear = (Date) inMap.get("enrollmentYear");
+        String enrollmentYear = (String) inMap.get("enrollmentYear");
+        if(enrollmentYear==null || enrollmentYear.equals("")){
+            enrollmentYear = null;
+        }
         String academy = (String) inMap.get("academy");
 
         UserMaintenance.stuUpdate(sname,sno,major,sex,enrollmentYear,academy);
@@ -252,6 +255,9 @@ public class UserMaintenanceController {
         String major = inMap.get("major");
         String sex = inMap.get("sex");
         String enrollmentYear = inMap.get("enrollmentYear");
+        if(enrollmentYear==null || enrollmentYear.equals("")){
+            enrollmentYear = null;
+        }
         String academy = inMap.get("academy");
 
         int rows = UserMaintenance.addStu(sname,sno,major,sex,
@@ -268,13 +274,28 @@ public class UserMaintenanceController {
     }
 
     @RequestMapping(value="addTea",method=RequestMethod.POST)
-    public Map addTea(@RequestBody Map<String,String> inMap){
+    public Map addTea(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String tname = inMap.get("tname");
         String tno = inMap.get("tno");
         String sex = inMap.get("sex");
         String academy = inMap.get("academy");
 
+        if(UserMaintenance.getTeaInfoById(tno,false).size()!=0){
+            //已有
+            outMap.put("state","4001");
+            return outMap;
+        }
+
+        UserMaintenance.addTea(tno,tname,sex,academy);
+        outMap.put("state","200");
 
         return outMap;
     }
@@ -330,7 +351,47 @@ public class UserMaintenanceController {
         return outMap;
     }
 
+    @RequestMapping(value="deleteStu",method=RequestMethod.POST)
+    public Map deleteStu(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
+        Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+        String sno = inMap.get("sno");
 
+        int r = UserMaintenance.deleteStu(sno);
+        if(r!=1){
+            outMap.put("state","4007");
+            return outMap;
+        }
+        outMap.put("state","200");
+        return outMap;
+    }
+
+    @RequestMapping(value="deleteTea",method=RequestMethod.POST)
+    public Map deleteTea(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
+        Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+        String tno = inMap.get("tno");
+
+        int r = UserMaintenance.deleteTea(tno);
+        if(r!=1){
+            outMap.put("state","4007");
+            return outMap;
+        }
+        outMap.put("state","200");
+        return outMap;
+    }
 
 }
 

@@ -52,7 +52,7 @@ public class UserMaintenance {
     }
 
     public static void stuUpdate(String sname, String sno, String major, String sex,
-                                 Date enrollmentYear, String academy){
+                                 String enrollmentYear, String academy){
         try {
             SqlSessionTool sqlSessionTool = new SqlSessionTool();
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
@@ -144,6 +144,34 @@ public class UserMaintenance {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static int deleteStu(String sno){
+        int r = 0;
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            StudentDao studentDao = new StudentDao(sqlSession);
+            r = studentDao.deleteOne(sno);
+            sqlSession.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return r;
+    }
+
+    public static int deleteTea(String tno){
+        int r = 0;
+        try {
+            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            TeacherDao teacherDao = new TeacherDao(sqlSession);
+            r = teacherDao.deleteOne(tno);
+            sqlSession.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return r;
     }
 
 }
