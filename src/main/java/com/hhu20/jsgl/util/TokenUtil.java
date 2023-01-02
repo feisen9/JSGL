@@ -32,7 +32,7 @@ public class TokenUtil {
             return null;
         }
         cache.del(token);
-        cache.set(token,aToken);
+        cache.set(token,aToken,600);
         return userId;
     }
 
@@ -64,7 +64,7 @@ public class TokenUtil {
     public String createToken(String userId){
         String accessToken = authorizationService.createAccessIdToken(userId);
         String refreshToken = authorizationService.createRefreshIdToken(userId);
-        String token = accessToken.toString();
+        String token = accessToken.toString()+"aas";
         if(accessToken==null||refreshToken==null){
             return null;
         }
