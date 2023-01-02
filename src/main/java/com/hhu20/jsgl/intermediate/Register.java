@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Register {
-    public static String reg(String userId, String password){
+    public static boolean reg(String userId, String password){
         try {
             SqlSessionTool sqlSessionTool = new SqlSessionTool();
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
@@ -20,10 +20,27 @@ public class Register {
             user.setUserId(userId);
             user.setPassword(password);
             UserDao userDao = new UserDao(sqlSession);
-            userDao.add(user);
-            String usertype = user.getUserType();
+            List<Map> Stu = UserMaintenance.getStuInfoById(userId,false);
+            List<Map> Tea = UserMaintenance.getTeaInfoById(userId,false);
+            if(Stu.size()==Tea.size()){
+                return false;
+            }
+            if(Stu.size()!=1 && Tea.size()!=1){
+                return false;
+            }
+            String userType;
+            String userName;
+            if(Stu.size()==1){
+                userType = "stu";
+                userDao.add(userId,password,userType,userId);
+                return true;
+            }else if(Tea.size()==1){
+                userType = "tea";
+                userDao.add(userId,password,userType,userId);
+                return true;
+            }
             sqlSession.close();
-            return usertype;
+            return false;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -19,8 +19,10 @@
     <select id="select" resultType="java.util.Map">
         select * from userpassword where userId = #{userId};
     </select>
-    <select id="add" resultType="java.lang.String" parameterType="com.hhu20.jsgl.pojo.User" statementType="CALLABLE">
-        {call regist(#{userId,mode=IN},#{password,mode=IN},#{userType,mode=OUT,jdbcType=VARCHAR})}
-    </select>
-
+<!--    <select id="add" resultType="java.lang.String" parameterType="com.hhu20.jsgl.pojo.User" statementType="CALLABLE">-->
+<!--        {call regist(#{userId,mode=IN},#{password,mode=IN},#{userType,mode=OUT,jdbcType=VARCHAR})}-->
+<!--    </select>-->
+    <insert id="add">
+        insert into userpassword(userId,password,userType,userName) values(#{userId},#{password},#{userType},#{userName});
+    </insert>
 </mapper>

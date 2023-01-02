@@ -38,10 +38,7 @@ public class RegisterController {
             //已经存在，失败 state = 4001
             outMap.put("state","4001");
         }
-
-        String usertype = Register.reg(userId, password);
-        System.out.println("usertype:"+usertype);
-        if(usertype.equals("stu") || usertype.equals("tea"))
+        if(Register.reg(userId, password))
             outMap.put("state","200");
         else
             outMap.put("state","4003");
