@@ -44,4 +44,21 @@ public class Bonus {
         return data;
     }
 
+    public static List<Map> searchBonus(String sno,String tno,int pno){
+        List<Map> data = null;
+        try{
+            SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            BonusDao bonusDao = new BonusDao(sqlSession);
+            data = bonusDao.searchBonus(sno,tno,pno);
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return data;
+    }
+
 }

@@ -116,15 +116,25 @@ public class CompetitionAwardsController {
     }
 
 
-    @RequestMapping(value="getBonusBySno",method=RequestMethod.POST)
-    public Map getBonusBySno(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
+    @RequestMapping(value="searchBonus",method=RequestMethod.POST)
+    public Map searchBonus(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
-
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
         String sno = inMap.get("sno");
-
-
+        String tno = inMap.get("tno");
+        int pno = Integer.parseInt(inMap.get("pno"));
+        List<Map> result = Bonus.searchBonus(sno,tno,pno);
+        outMap.put("state","200");
+        outMap.put("data",result);
         return outMap;
     }
+
 
     @RequestMapping(value="getStuBonus",method=RequestMethod.POST)
     public Map getStuBonus(@RequestBody(required = false) Map<String,String> inMap , @RequestHeader Map<String,String> tokenMap){

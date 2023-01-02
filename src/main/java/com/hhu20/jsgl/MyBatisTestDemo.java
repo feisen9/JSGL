@@ -78,11 +78,14 @@ public class MyBatisTestDemo {
 //        List<Map> users = userDao.selectAll();
 //        System.out.println(users.get(0).get("userId"));
         ///////////////////////////////////
-        AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
-        List<String> tnos = advisorsDao.selectTnoByTeamno(1);
-        System.out.println(tnos.get(0));
+//        AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
+//        List<String> tnos = advisorsDao.selectTnoByTeamno(1);
+//        System.out.println(tnos.get(0));
         //关闭sqlSession释放资源
         sqlSession.close();
+
+//        System.out.println("结果");
+//        System.out.println(Integer.parseInt(""));
 
     }
 }
