@@ -17,6 +17,15 @@ public class JsglApplication {
         SpringApplication.run(JsglApplication.class, args);
     }
     public static void test(){
+        String a  = "AA";
+        String b = "AA";
+        String c = "BB";
+        System.out.println(a==c);
+        System.out.println(a==b);
+        System.out.println(a=="AA");
+        System.out.println(a=="BB");
+        System.out.println("asf"=="aaa");
+        System.out.println("asf"=="asf");
         Instant date = new Date().toInstant();
         String datee = date.toString().substring(0,19);
         System.out.println("aaa: "+datee);

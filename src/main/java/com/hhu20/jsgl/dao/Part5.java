@@ -27,12 +27,12 @@ public class Part5 {
 
     public List<Map> teamSelectN(String teamno, String pno, String teamname, String registertime, String r_audit_result,
                                  String a_audit_result){
-        if (pno==""){
-            pno = null;
-        }
-        if (teamno==""){
-            teamno = null;
-        }
+        if (teamno!=null &&teamno.equals("")){teamno = null;}
+        if (pno!=null &&pno.equals("")){pno = null;}
+        if (teamname!=null &&teamname.equals("")){teamname = null;}
+        if (registertime!=null &&registertime.equals("")){registertime = null;}
+        if (r_audit_result!=null &&r_audit_result.equals("")){r_audit_result = null;}
+        if (a_audit_result!=null &&a_audit_result.equals("")){a_audit_result = null;}
         return part5Mapper.teamSelectN(teamno,pno,teamname,registertime,r_audit_result,a_audit_result);
     }
 
@@ -65,9 +65,13 @@ public class Part5 {
     }
     public List<Map> selectTeamCT(String pno, String cname, String sno, String sname,
                            String tno, String tname , String regAuditResult){
-        if (pno==""){
-            pno = null;
-        }
+        if (pno!=null &&pno.equals("")){pno = null;}
+        if (cname!=null &&cname.equals("")){cname = null;}
+        if (sno!=null &&sno.equals("")){sno = null;}
+        if (sname!=null &&sname.equals("")){sname = null;}
+        if (tno!=null &&tno.equals("")){tno = null;}
+        if (tname!=null &&tname.equals("")){tname = null;}
+        if (regAuditResult!=null &&regAuditResult.equals("")){regAuditResult = null;}
         return part5Mapper.selectTeamCT(pno,cname,sno,sname,tno,tname,regAuditResult);
     }
 

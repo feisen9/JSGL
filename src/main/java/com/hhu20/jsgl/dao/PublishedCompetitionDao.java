@@ -30,8 +30,12 @@ public class PublishedCompetitionDao {
         return outMap;
     }
 
-    public List<Map> update(String PNO,String CNO,String PSTATE,String R_INFO_COLLECT_TIME,String A_INFO_COLLECT_TIME,String R_INFO_DEADLINE,String A_INFO_DEADLINE,String SMAXNUM,String TMAXNUM) {
-        List<Map> outMap = publishedCompetitionMapper.update(PNO,CNO,PSTATE,R_INFO_COLLECT_TIME,A_INFO_COLLECT_TIME,R_INFO_DEADLINE,A_INFO_DEADLINE,SMAXNUM,TMAXNUM);
+    public List<Map> update(String PNO,String PSTATE,String pperson, String pyear, String R_INFO_COLLECT_TIME,
+                            String A_INFO_COLLECT_TIME,String R_INFO_DEADLINE,String A_INFO_DEADLINE,
+                            String SMAXNUM,String TMAXNUM) {
+        List<Map> outMap = publishedCompetitionMapper.update(PNO,PSTATE, pperson,pyear, R_INFO_COLLECT_TIME,
+                 A_INFO_COLLECT_TIME, R_INFO_DEADLINE, A_INFO_DEADLINE,
+                SMAXNUM, TMAXNUM);
         return outMap;
     }
 

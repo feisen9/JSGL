@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 -->
+
+<mapper namespace="com.hhu20.jsgl.mapper.Part4Mapper">
+
+    <select id="selectAllPC" resultType="java.util.Map">
+        call selectAllPC();
+    </select>
+
+    <select id="selectPC" resultType="java.util.Map">
+        call selectPC(#{pno}, #{cname}, #{pstate}, #{pperson}, #{pyear}, #{r_info_collect_time}, #{a_info_collect_time},
+                            #{r_info_deadline} , #{a_info_deadline}, #{smaxnum}, #{tmaxnum})
+    </select>
+
+    <insert id="insertP">
+        call insertP(#{cno}, #{pstate}, #{pperson}, #{pyear}, #{r_info_collect_time}, #{a_info_collect_time},
+            #{r_info_deadline} , #{a_info_deadline}, #{smaxnum}, #{tmaxnum})
+    </insert>
+
+</mapper>

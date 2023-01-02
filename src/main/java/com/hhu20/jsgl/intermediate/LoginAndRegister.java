@@ -124,8 +124,9 @@ public class LoginAndRegister {
             return outMap;
         }
         Map<String,Object> user = users.get(0);
-        if((String)user.get("password")!=password){
+        if(!((String)user.get("password")).equals(password)){
             outMap.put("state","4005");
+            return outMap;
         }
 
         outMap.put("state","200");
