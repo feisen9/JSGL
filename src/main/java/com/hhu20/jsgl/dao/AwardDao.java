@@ -4,8 +4,10 @@ import com.hhu20.jsgl.mapper.AwardMapper;
 import com.hhu20.jsgl.utils.FuzzyQueryStr;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class AwardDao {
     private SqlSession sqlSession;
@@ -14,48 +16,69 @@ public class AwardDao {
         this.sqlSession = sqlSession;
         awardMapper = sqlSession.getMapper(AwardMapper.class);
     }
-
+    public void commit(){
+        sqlSession.commit();
+    }
 //    public selectAwardInfo(int pno,String cname,String awardInfo,String sno,String sname,String tno,String tname,String awardAuditResult){
 //
 //    }
     //学生上报获奖信息
-    public void addAwardInfo(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo) throws Exception
+    public int addAwardInfo(Integer teamNo, List<Map> teamMembers,List<Map> advisors,Integer pno,String awardInfo) throws Exception
     {
         //先更新team表中的pno和awardInfo
         TeamDao teamDao = new TeamDao(sqlSession);
-        teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
+        int teamrows = teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
         //更新teammember表中的队员赋分系数
         TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
         teamMemberDao.updateTeamMembers(teamMembers,teamNo);
         //更新advisors表中老师的赋分系数
         AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
         advisorsDao.update(advisors,teamNo);
+        return teamrows;
     }
 
     // 修改获奖信息
-    public void updateAwardInfo(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo) throws Exception
+    public int updateAwardInfo(Integer teamNo, List<Map> teamMembers,List<Map> advisors,Integer pno,String awardInfo) throws Exception
     {
+        int rows = 0;
         //先更新team表中的pno和awardInfo
         TeamDao teamDao = new TeamDao(sqlSession);
-        teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
+        rows = teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
         //更新teammember表中的队员赋分系数
         TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
         teamMemberDao.updateTeamMembers(teamMembers,teamNo);
         //更新advisors表中老师的赋分系数
         AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
         advisorsDao.update(advisors,teamNo);
+        return rows;
     }
 
     //审核获奖信息
-    public void auditAwardInfo(String teamno,String awardAuditResult) throws Exception {
+    public int auditAwardInfo(String teamno,String awardAuditResult) throws Exception {
         TeamDao teamDao = new TeamDao(sqlSession);
-        teamDao.updateAwardAuditResult(teamno,awardAuditResult);
+        return teamDao.updateAwardAuditResult(teamno,awardAuditResult);
     }
-    public List<Map> searchAward(int pno,String cname,String awardInfo,String sno,String sname,String tno,String tname,String awardAuditResult){
-        return awardMapper.searchAward(pno, FuzzyQueryStr.bilateralFuzzy(cname), awardInfo, sno, FuzzyQueryStr.bilateralFuzzy(sname), tno, FuzzyQueryStr.bilateralFuzzy(tname), awardAuditResult);
+    public List<Map> searchAward(Integer pno,String cname,String awardInfo,String sno,String sname,String tno,String tname,String awardAuditResult){
+        TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
+        AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
+        List<Map> result = awardMapper.searchAward(pno, FuzzyQueryStr.bilateralFuzzy(cname), awardInfo, sno, FuzzyQueryStr.bilateralFuzzy(sname), tno, FuzzyQueryStr.bilateralFuzzy(tname), awardAuditResult);
+        List<Map> outMap = new ArrayList<>();
+        for(int i=0;i<result.size();i++){
+            Map temp = result.get(i);
+            Map<String, Object> newmap = new TreeMap<>();
+            List<Map> teamMembers = teamMemberDao.selectByTeamno((Integer) temp.get("teamno"));
+            newmap.put("teamMembers",teamMembers);
+            List<Map> advisors = advisorsDao.selectByTeamno((Integer) temp.get("teamno"));
+            newmap.put("advisors",advisors);
+            newmap.put("teamNo",temp.get("teamno"));
+            newmap.put("pno", temp.get("pno"));
+            newmap.put("awardInfo", temp.get("awardinfo"));
+            outMap.add(newmap);
+        }
+        return outMap;
     }
 
-    //获取所有奖金信息
+    //获取所有获奖信息
     public List<Map> getAwardInfo(){
         List<Map> outMap = awardMapper.getAwardInfo();
         TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
@@ -70,7 +93,7 @@ public class AwardDao {
         }
         return outMap;
     }
-    public void deleteAwardInfo(int teamno){
-        awardMapper.deleteAwardInfo(teamno);
+    public int deleteAwardInfo(Integer teamno){
+        return awardMapper.deleteAwardInfo(teamno);
     }
 }
