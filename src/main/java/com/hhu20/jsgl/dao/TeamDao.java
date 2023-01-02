@@ -23,7 +23,7 @@ public class TeamDao {
     };
 
     //更新获奖信息审核信息
-    public void updateAwardAuditResult(String teamNo, String awardAuditResult) throws Exception{
-        teamMapper.updateAwardAuditResult(teamNo,awardAuditResult);
+    public int updateAwardAuditResult(String teamNo, String awardAuditResult) throws Exception{
+        return teamMapper.updateAwardAuditResult(teamNo,awardAuditResult);
     }
 }

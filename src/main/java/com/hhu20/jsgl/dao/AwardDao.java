@@ -52,9 +52,9 @@ public class AwardDao {
     }
 
     //审核获奖信息
-    public void auditAwardInfo(String teamno,String awardAuditResult) throws Exception {
+    public int auditAwardInfo(String teamno,String awardAuditResult) throws Exception {
         TeamDao teamDao = new TeamDao(sqlSession);
-        teamDao.updateAwardAuditResult(teamno,awardAuditResult);
+        return teamDao.updateAwardAuditResult(teamno,awardAuditResult);
     }
     public List<Map> searchAward(int pno,String cname,String awardInfo,String sno,String sname,String tno,String tname,String awardAuditResult){
         return awardMapper.searchAward(pno, FuzzyQueryStr.bilateralFuzzy(cname), awardInfo, sno, FuzzyQueryStr.bilateralFuzzy(sname), tno, FuzzyQueryStr.bilateralFuzzy(tname), awardAuditResult);

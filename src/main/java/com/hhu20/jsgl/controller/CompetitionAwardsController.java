@@ -68,19 +68,57 @@ public class CompetitionAwardsController {
     }
 
     @RequestMapping(value="auditAwardInfo",method=RequestMethod.POST)
-    public Map auditAwardInfo(@RequestBody Map<String,String> inMap){
+    public Map auditAwardInfo(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+        String awardAuditResult = inMap.get("awardAuditResult");
         String teamNo = inMap.get("teamNo");
+
+        int rows = Award.auditAwardInfo(teamNo,awardAuditResult);
+        if(rows == 1)
+            outMap.put("state","200");
+        else
+            outMap.put("state","4004");
+        return outMap;
+    }
+
+    @RequestMapping(value="search",method=RequestMethod.POST)
+    public Map search(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
+        Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+
+        int pno = Integer.parseInt(inMap.get("pno"));
+        String cname = inMap.get("cname");
+        String awardInfo = inMap.get("awardInfo");
+        String sno = inMap.get("sno");
+        String sname = inMap.get("sname");
+        String tno = inMap.get("tno");
+        String tname = inMap.get("tname");
         String awardAuditResult = inMap.get("awardAuditResult");
 
-
+        List<Map> resultList = Award.search(pno,cname,awardInfo,sno,sname,tno,tname,awardAuditResult);
+        outMap.put("data",resultList);
+        outMap.put("state","200");
         return outMap;
     }
 
 
     @RequestMapping(value="getBonusBySno",method=RequestMethod.POST)
-    public Map getBonusBySno(@RequestBody Map<String,String> inMap){
+    public Map getBonusBySno(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+
         String sno = inMap.get("sno");
 
 
