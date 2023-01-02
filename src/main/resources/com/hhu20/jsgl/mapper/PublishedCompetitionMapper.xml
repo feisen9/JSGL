@@ -18,9 +18,35 @@
     </select>
 
     <select id="update">
-        update PublishedCompetition set PSTATE=#{PSTATE}, pperson = #{pperson}, pyear = #{pyear}
-                                R_INFO_COLLECT_TIME=#{R_INFO_COLLECT_TIME}, A_INFO_COLLECT_TIME=#{A_INFO_COLLECT_TIME},
-                                R_INFO_DEADLINE = #{R_INFO_DEADLINE},A_INFO_DEADLINE = #{A_INFO_DEADLINE},SMAXNUM = #{SMAXNUM},TMAXNUM = #{TMAXNUM} where PNO=#{PNO}
+        update PublishedCompetition set
+        <if test="PSTATE != null and PSTATE != ''">
+                    PSTATE=#{PSTATE},
+        </if>
+        <if test="pperson != null and pperson != ''">
+                    pperson = #{pperson},
+        </if>
+        <if test="pyear != null and pyear != ''">
+                    pyear = #{pyear},
+        </if>
+        <if test=" R_INFO_COLLECT_TIME != null and R_INFO_COLLECT_TIME != ''">
+                                R_INFO_COLLECT_TIME=#{R_INFO_COLLECT_TIME},
+        </if>
+        <if test=" A_INFO_COLLECT_TIME != null and A_INFO_COLLECT_TIME != ''">
+                                A_INFO_COLLECT_TIME=#{A_INFO_COLLECT_TIME},
+        </if>
+        <if test=" R_INFO_DEADLINE != null and R_INFO_DEADLINE != ''">
+                                R_INFO_DEADLINE = #{R_INFO_DEADLINE},
+        </if>
+        <if test=" A_INFO_DEADLINE != null and  A_INFO_DEADLINE != ''">
+                                A_INFO_DEADLINE = #{A_INFO_DEADLINE},
+        </if>
+        <if test=" SMAXNUM != null and SMAXNUM != ''">
+                                SMAXNUM = #{SMAXNUM},
+        </if>
+        <if test=" TMAXNUM != null and TMAXNUM != ''">
+                                TMAXNUM = #{TMAXNUM}
+        </if>
+                    where PNO=#{PNO}
     </select>
 
     <select id="selectByCondition" resultType="java.util.Map">

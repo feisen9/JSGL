@@ -58,7 +58,7 @@ public class CompetitionMaintenanceController {
         String organizer = inMap.get("organizer");
         String hostinstitue = inMap.get("hostinstitue");
 
-        CompetitionMaintenance.add(cno,cname,clevel,organizer,hostinstitue);
+        CompetitionMaintenance.update(cno,cname,clevel,organizer,hostinstitue);
         outMap.put("state","200");
 
         return outMap;

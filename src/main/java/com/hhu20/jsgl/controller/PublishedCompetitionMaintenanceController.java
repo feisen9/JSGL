@@ -115,15 +115,30 @@ public class PublishedCompetitionMaintenanceController {
             outMap.put("state","5000");
             return outMap;
         }
+        for(String s: inMap.keySet()){
+            System.out.println(s+" "+inMap.get(s));
+        }
         String pno = inMap.get("pno");
         String cname = inMap.get("cname");
         String pstate = inMap.get("pstate");
         String pperson = inMap.get("pperson");
         String pyear = inMap.get("pyear");
         String regCollectTime = inMap.get("regCollectTime");
-        String regDeadline = inMap.get("regDeadline");
-        String awardCollectTime = inMap.get("awardCollectTime");
-        String awardDeadline = inMap.get("awardDeadline");
+        if(regCollectTime!=null && regCollectTime.length()>=19) {
+            regCollectTime = regCollectTime.substring(0, 19);
+        }
+        String regDeadline = (String) inMap.get("regDeadline");
+        if(regDeadline!=null&&regDeadline.length()>=19) {
+            regDeadline = regDeadline.substring(0, 19);
+        }
+        String awardCollectTime = (String) inMap.get("awardCollectTime");
+        if(awardCollectTime!=null&&awardCollectTime.length()>=19) {
+            awardCollectTime = awardCollectTime.substring(0, 19);
+        }
+        String awardDeadline = (String) inMap.get("awardDeadline");
+        if(awardDeadline!=null&&awardDeadline.length()>=19) {
+            awardDeadline = awardDeadline.substring(0, 19);
+        }
         String sMaxNum = inMap.get("sMaxNum");
         String tMaxNum = inMap.get("tMaxNum");
 
@@ -168,16 +183,28 @@ public class PublishedCompetitionMaintenanceController {
             System.out.println(k);
         }
 
-//        String pno = Integer.toString((Integer)inMap.get("pno"));
-        String pno = null;
+        String pno = (String) inMap.get("pno");
+//        String pno = null;
         String cname = (String) inMap.get("cname");
         String pperson = (String) inMap.get("pperson");
         String pyear = (String) inMap.get("pyear");
         String pstate = (String) inMap.get("pstate");
         String regCollectTime = (String) inMap.get("regCollectTime");
+        if(regCollectTime!=null && regCollectTime.length()>=19) {
+            regCollectTime = regCollectTime.substring(0, 19);
+        }
         String regDeadline = (String) inMap.get("regDeadline");
+        if(regDeadline!=null&&regDeadline.length()>=19) {
+            regDeadline = regDeadline.substring(0, 19);
+        }
         String awardCollectTime = (String) inMap.get("awardCollectTime");
+        if(awardCollectTime!=null&&awardCollectTime.length()>=19) {
+            awardCollectTime = awardCollectTime.substring(0, 19);
+        }
         String awardDeadline = (String) inMap.get("awardDeadline");
+        if(awardDeadline!=null&&awardDeadline.length()>=19) {
+            awardDeadline = awardDeadline.substring(0, 19);
+        }
         String sMaxNum = (String) inMap.get("sMaxNum");
         String tMaxNum = (String) inMap.get("tMaxNum");
         System.out.println("cname: "+cname);
