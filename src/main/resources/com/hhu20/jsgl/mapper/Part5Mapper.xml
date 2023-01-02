@@ -45,10 +45,10 @@
         select *
         from team
         where 1=1
-        <if test="teamno != null and teamno != ''">
+        <if test="teamno != null">
             and teamno like #{teamno}
         </if>
-        <if test="pno  != null and pno != ''">
+        <if test="pno  != null ">
             and pno  like #{pno}
         </if>
         <if test="teamname != null and teamname != ''">

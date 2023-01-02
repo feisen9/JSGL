@@ -24,7 +24,14 @@ public class SignUp4CompetitionController {
             outMap.put("state","5000");
             return outMap;
         }
-        Map<String, Object> data = (Map)inMap.get("data");
+        /*
+        前端接口
+         */
+//        for (String s: inMap.keySet()){
+//            System.out.println(s);
+//        }
+//        Map<String, Object> data = (Map)inMap.get("data");
+        Map<String, Object> data = inMap;
         String teamName = (String) data.get("teamName");
         String pno = (String) data.get("pno");
         List<Map> teamMembers = (List<Map>) data.get("teamMembers");
@@ -129,7 +136,8 @@ public class SignUp4CompetitionController {
             outMap.put("state","5000");
             return outMap;
         }
-        Map<String, Object> data = (Map)inMap.get("data");
+//        Map<String, Object> data = (Map)inMap.get("data");
+        Map<String, Object> data = inMap;
         String pno = (String) data.get("pno");
         String cname = (String) data.get("cname");
         String sno = (String) data.get("sno");

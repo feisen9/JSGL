@@ -124,7 +124,7 @@ public class SignUp4Competition {
             throw new RuntimeException(e);
         }
         outMap.put("data",data);
-        return (List<Map>) outMap;
+        return (List<Map>) data;
     }
     public static List<Map> selectAll(){
         Map<String, Object> outMap= new TreeMap<>();
@@ -142,7 +142,7 @@ public class SignUp4Competition {
                 map.put("pno", team.get("pno"));
                 map.put("cname", team.get("cname"));
                 map.put("regAuditResult", team.get("r_audit_result"));
-                String teamno = (String) team.get("teamno");
+                String teamno = Integer.toString((Integer) team.get("teamno"));
                 map.put("teamMembers",part5.selectTStu(teamno));
                 map.put("advisors",part5.selectTTea(teamno));
                 data.add(map);
@@ -152,7 +152,7 @@ public class SignUp4Competition {
             throw new RuntimeException(e);
         }
         outMap.put("data",data);
-        return (List<Map>) outMap;
+        return data;
     }
 
     public static Map<String,String> teamInsert(String teamname, String pno, List<Map> teamMembers, List<Map> advisors){
@@ -201,16 +201,17 @@ public class SignUp4Competition {
             }
 
             Instant date = new Date().toInstant();
-            part5.teamInsert(teamname,pno, Date.from(date));
+            String datee = date.toString().substring(0,19);
+            part5.teamInsert(teamname,pno, datee);
             List<Map> rList = part5.teamSelectN(null,pno,teamname,
-                    Date.from(date),null,null);
+                    datee,null,null);
             if(rList.size()!=1){
                 System.out.println("出现错误");
                 sqlSession.close();
                 outMap.put("state","4003");
                 return outMap;
             }
-            String teamno = (String) rList.get(0).get("teamno");
+            String teamno =  Integer.toString((Integer) rList.get(0).get("teamno"));
             outMap.put("teamno",teamno);
             for(Map stu : teamMembers){
                 String sno = (String) stu.get("sno");

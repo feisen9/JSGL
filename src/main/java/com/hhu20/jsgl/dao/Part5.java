@@ -25,12 +25,18 @@ public class Part5 {
         part5Mapper.deleteStuTea(teamno);
     }
 
-    public List<Map> teamSelectN(String teamno, String pno, String teamname, Date registertime, String r_audit_result,
+    public List<Map> teamSelectN(String teamno, String pno, String teamname, String registertime, String r_audit_result,
                                  String a_audit_result){
+        if (pno==""){
+            pno = null;
+        }
+        if (teamno==""){
+            teamno = null;
+        }
         return part5Mapper.teamSelectN(teamno,pno,teamname,registertime,r_audit_result,a_audit_result);
     }
 
-    public void teamInsert(String teamname, String pno, Date registertime){
+    public void teamInsert(String teamname, String pno, String registertime){
         part5Mapper.teamInsert(teamname,pno,registertime);
     }
 
@@ -59,6 +65,9 @@ public class Part5 {
     }
     public List<Map> selectTeamCT(String pno, String cname, String sno, String sname,
                            String tno, String tname , String regAuditResult){
+        if (pno==""){
+            pno = null;
+        }
         return part5Mapper.selectTeamCT(pno,cname,sno,sname,tno,tname,regAuditResult);
     }
 
