@@ -24,7 +24,7 @@ public class AdvisorsDao {
          */
         return advisorsMapper.selectTnoByTeamno(teamno);
     }
-    public void update(List<Map> advisors, int teamno) throws Exception{
+    public void update(List<Map> advisors, Integer teamno) throws Exception{
         for (Map advisor:advisors){
             advisorsMapper.update((Float) advisor.get("soefficient"), (String) advisor.get("tno"),teamno);
         }

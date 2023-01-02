@@ -17,7 +17,7 @@
             select sno as userId, pno, teamno as teamNo, cname, clevel, bonusAmount
             from stu_bonus_result
             where sno = #{sno}
-            <if test="pno != null and pno != ''">
+            <if test="pno != null">
                 and pno = #{pno}
             </if>
         </if>;
@@ -25,7 +25,7 @@
             select tno as userId, pno, teamno as teamNo, cname, clevel, bonusAmount
             from tea_bonus_result
             where tno = #{tno}
-            <if test="pno != null and pno != ''">
+            <if test="pno != null">
                 and pno = #{pno}
             </if>
         </if>;

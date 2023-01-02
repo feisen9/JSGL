@@ -84,8 +84,8 @@ public class MyBatisTestDemo {
         //关闭sqlSession释放资源
         sqlSession.close();
 
-//        System.out.println("结果");
-//        System.out.println(Integer.parseInt(""));
+        System.out.println("结果");
+        System.out.println(Integer.valueOf("123"));
 
     }
 }

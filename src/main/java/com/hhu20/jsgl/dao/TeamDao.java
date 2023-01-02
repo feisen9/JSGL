@@ -18,7 +18,7 @@ public class TeamDao {
     public List<Map> selectAll(){
         return teamMapper.selectAll();
     }
-    public int updatePnoandAwardInfo(int teamno, int pno, String awardinfo) throws Exception{
+    public int updatePnoandAwardInfo(Integer teamno, Integer pno, String awardinfo) throws Exception{
         return teamMapper.updatePnoandAwardInfo(teamno,pno,awardinfo);
     };
 

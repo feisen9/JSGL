@@ -6,12 +6,14 @@ import com.hhu20.jsgl.dao.SqlSessionTool;
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Award {
 
-    public static int add(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo) {
+    public static int add(Integer teamNo, List<Map> teamMembers,List<Map> advisors,Integer pno,String awardInfo) {
         int rows = -1;
         try {
             SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
@@ -26,7 +28,7 @@ public class Award {
         return rows;
     }
 
-    public static int update(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo){
+    public static int update(Integer teamNo, List<Map> teamMembers,List<Map> advisors,Integer pno,String awardInfo){
         int rows=-1;
         try{
             SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
@@ -60,7 +62,7 @@ public class Award {
         return rows;
     }
 
-    public static List<Map> search(int pno, String cname, String awardInfo, String sno, String sname, String tno, String tname, String awardAuditResult){
+    public static List<Map> search(Integer pno, String cname, String awardInfo, String sno, String sname, String tno, String tname, String awardAuditResult){
         List<Map> data;
         try{
             SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
@@ -78,12 +80,21 @@ public class Award {
     }
 
     public static List<Map> getAwardInfo(){
-        List<Map> data = null;
+        List<Map> data = new ArrayList<>();
         try{
             SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
             AwardDao awardDao = new AwardDao(sqlSession);
-            data = awardDao.getAwardInfo();
+            List<Map> results = awardDao.getAwardInfo();
+            for(Map result:results){
+                Map<String, Object> map = new TreeMap<>();
+                map.put("teamNo",result.get("teamno"));
+                map.put("teamMembers",result.get("teamMembers"));
+                map.put("advisors",result.get("advisors"));
+                map.put("pno",result.get("pno"));
+                map.put("awardInfo",result.get("awardinfo"));
+                data.add(map);
+            }
             sqlSession.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -94,7 +105,7 @@ public class Award {
         return data;
     }
 
-    public static int delete(int teamNo){
+    public static int delete(Integer teamNo){
         int rows = -1;
         try{
             SqlSessionTool sqlSessionTool = new SqlSessionTool(false);

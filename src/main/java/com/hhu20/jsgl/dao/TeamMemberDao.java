@@ -14,7 +14,7 @@ public class TeamMemberDao {
         this.sqlSession = sqlSession;
         teamMemberMapper = sqlSession.getMapper(TeamMemberMapper.class);
     }
-    public void updateTeamMembers(List<Map> teamMembers,int teamNo) throws Exception{       //更新队员
+    public void updateTeamMembers(List<Map> teamMembers,Integer teamNo) throws Exception{       //更新队员
         for(Map teamMember : teamMembers){
             teamMemberMapper.updateTeammembers((Float) teamMember.get("sofficient"), (String) teamMember.get("sno"),teamNo);
         }

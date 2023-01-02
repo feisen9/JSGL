@@ -9,6 +9,6 @@ public interface BonusMapper {
 
     List<Map> selectAllTeaBonus();
     List<Map> selectAllStuBonus();
-    List<Map> searchBonus(@Param("sno") String sno,@Param("tno") String tno, @Param("pno") int pno);
+    List<Map> searchBonus(@Param("sno") String sno,@Param("tno") String tno, @Param("pno") Integer pno);
 
 }

@@ -23,7 +23,7 @@ public class BonusDao {
         return bonusMapper.selectAllStuBonus();
     }
 
-    public List<Map> searchBonus(String sno,String tno,int pno){
+    public List<Map> searchBonus(String sno,String tno,Integer pno){
         return bonusMapper.searchBonus(sno, tno, pno);
     }
 

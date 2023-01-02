@@ -26,9 +26,20 @@ public class CompetitionAwardsController {
             return outMap;
         }
 
+
         Map<String,Object> data = (Map)inMap.get("data");
-        int teamNo = (int) data.get("teamNo");
-        int pno = (int) data.get("pno");
+        String teamNostr = (String) data.get("pno");
+        Integer teamNo = null;
+        if(!teamNostr.equals("")){
+            teamNo = Integer.valueOf(teamNostr);
+        }
+
+        String pnostr = (String) data.get("pno");
+        Integer pno = null;
+        if(!pnostr.equals("")){
+            pno = Integer.valueOf(pnostr);
+        }
+
         List<Map> teamMembers = (List<Map>) data.get("teamMembers");
         List<Map> advisors = (List<Map>) data.get("advisors");
         String awardInfo = (String) data.get("awardInfo");
@@ -55,8 +66,17 @@ public class CompetitionAwardsController {
         }
 
         Map<String,Object> data = (Map)inMap.get("data");
-        int teamNo = (int) data.get("teamNo");
-        int pno = (int) data.get("pno");
+        String teamNostr = (String) data.get("pno");
+        Integer teamNo = null;
+        if(!teamNostr.equals("")){
+            teamNo = Integer.valueOf(teamNostr);
+        }
+
+        String pnostr = (String) data.get("pno");
+        Integer pno = null;
+        if(!pnostr.equals("")){
+            pno = Integer.valueOf(pnostr);
+        }
         List<Map> teamMembers = (List<Map>) data.get("teamMembers");
         List<Map> advisors = (List<Map>) data.get("advisors");
         String awardInfo = (String) data.get("awardInfo");
@@ -100,7 +120,12 @@ public class CompetitionAwardsController {
             return outMap;
         }
 
-        int pno = Integer.parseInt(inMap.get("pno"));
+
+        String pnostr = (String) inMap.get("pno");
+        Integer pno = null;
+        if(!pnostr.equals("")){
+            pno = Integer.valueOf(pnostr);
+        }
         String cname = inMap.get("cname");
         String awardInfo = inMap.get("awardInfo");
         String sno = inMap.get("sno");
@@ -126,9 +151,14 @@ public class CompetitionAwardsController {
             outMap.put("state","5000");
             return outMap;
         }
+
+        String pnostr = inMap.get("pno");
+        Integer pno = null;
+        if(!pnostr.equals("")){
+            pno = Integer.valueOf(pnostr);
+        }
         String sno = inMap.get("sno");
         String tno = inMap.get("tno");
-        int pno = Integer.parseInt(inMap.get("pno"));
         List<Map> result = Bonus.searchBonus(sno,tno,pno);
         outMap.put("state","200");
         outMap.put("data",result);
@@ -199,7 +229,12 @@ public class CompetitionAwardsController {
             return outMap;
         }
 
-        int teamNo = Integer.parseInt(inMap.get("teamNo"));
+//        int teamNo = Integer.parseInt(inMap.get("teamNo"));
+        String teamNostr = (String) inMap.get("pno");
+        Integer teamNo = null;
+        if(!teamNostr.equals("")){
+            teamNo = Integer.valueOf(teamNostr);
+        }
         int rows = Award.delete(teamNo);
         if(rows == 1)
             outMap.put("state","200");
