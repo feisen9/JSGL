@@ -10,5 +10,5 @@ public interface AwardMapper {
                           @Param("sno")String sno, @Param("sname")String sname, @Param("tno")String tno,
                           @Param("tname")String tname, @Param("awardAuditResult")String awardAuditResult);
     List<Map> getAwardInfo();
-    void deleteAwardInfo(@Param("teamno") int teamno);
+    int deleteAwardInfo(@Param("teamno") int teamno);
 }

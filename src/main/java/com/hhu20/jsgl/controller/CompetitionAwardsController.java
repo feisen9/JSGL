@@ -1,6 +1,7 @@
 package com.hhu20.jsgl.controller;
 
 import com.hhu20.jsgl.intermediate.Award;
+import com.hhu20.jsgl.intermediate.Bonus;
 import com.hhu20.jsgl.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -126,18 +127,74 @@ public class CompetitionAwardsController {
     }
 
     @RequestMapping(value="getStuBonus",method=RequestMethod.POST)
-    public Map getStuBonus(@RequestBody Map<String,String> inMap){
+    public Map getStuBonus(@RequestBody(required = false) Map<String,String> inMap , @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
 
-
+        List<Map> resultList = Bonus.getStuBonus();
+        outMap.put("state","200");
+        outMap.put("data",resultList);
         return outMap;
+
     }
 
     @RequestMapping(value="getTeaBonus",method=RequestMethod.POST)
-    public Map getTeaBonus(@RequestBody Map<String,String> inMap){
+    public Map getTeaBonus(@RequestBody(required = false) Map<String,String> inMap , @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
 
+        List<Map> resultList = Bonus.getTeaBonus();
+        outMap.put("state","200");
+        outMap.put("data",resultList);
+        return outMap;
+    }
 
+    @RequestMapping(value="getAwardInfo",method=RequestMethod.POST)
+    public Map getAwardInfo(@RequestBody(required = false) Map<String,String> inMap , @RequestHeader Map<String,String> tokenMap){
+        Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+
+        List<Map> resultList = Award.getAwardInfo();
+        outMap.put("state","200");
+        outMap.put("data",resultList);
+        return outMap;
+    }
+
+    @RequestMapping(value="delete",method=RequestMethod.POST)
+    public Map delete(@RequestBody Map<String,String> inMap , @RequestHeader Map<String,String> tokenMap){
+        Map<String, Object> outMap = new TreeMap<>();
+        String token = tokenMap.get("authorization");
+        String userId = tokenUtil.verifyToken(token);
+        if(userId==null){
+            //token 过期
+            outMap.put("state","5000");
+            return outMap;
+        }
+
+        int teamNo = Integer.parseInt(inMap.get("teamNo"));
+        int rows = Award.delete(teamNo);
+        if(rows == 1)
+            outMap.put("state","200");
+        else
+            outMap.put("state","4007");
         return outMap;
     }
 }

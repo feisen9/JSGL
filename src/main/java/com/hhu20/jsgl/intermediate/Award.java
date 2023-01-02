@@ -1,6 +1,7 @@
 package com.hhu20.jsgl.intermediate;
 
 import com.hhu20.jsgl.dao.AwardDao;
+import com.hhu20.jsgl.dao.BonusDao;
 import com.hhu20.jsgl.dao.SqlSessionTool;
 import org.apache.ibatis.session.SqlSession;
 
@@ -76,5 +77,38 @@ public class Award {
         return data;
     }
 
+    public static List<Map> getAwardInfo(){
+        List<Map> data = null;
+        try{
+            SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            AwardDao awardDao = new AwardDao(sqlSession);
+            data = awardDao.getAwardInfo();
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return data;
+    }
+
+    public static int delete(int teamNo){
+        int rows = -1;
+        try{
+            SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
+            SqlSession sqlSession = sqlSessionTool.getSqlSession();
+            AwardDao awardDao = new AwardDao(sqlSession);
+            rows = awardDao.deleteAwardInfo(teamNo);
+            sqlSession.commit();
+            sqlSession.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return rows;
+    }
 
 }

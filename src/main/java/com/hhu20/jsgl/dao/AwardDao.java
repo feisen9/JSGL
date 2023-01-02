@@ -75,7 +75,7 @@ public class AwardDao {
         }
         return outMap;
     }
-    public void deleteAwardInfo(int teamno){
-        awardMapper.deleteAwardInfo(teamno);
+    public int deleteAwardInfo(int teamno){
+        return awardMapper.deleteAwardInfo(teamno);
     }
 }
