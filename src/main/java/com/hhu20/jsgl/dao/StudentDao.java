@@ -50,7 +50,7 @@ public class StudentDao {
     }
 
     public void updateStu(String sname, String sno , String major, String sex ,
-                          Date enrollmentYear , String academy) throws Exception{
+                          String enrollmentYear , String academy) throws Exception{
 
         //通过MajorDao查出major对应的mno
         MajorDao majorDao = new MajorDao(sqlSession);

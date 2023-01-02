@@ -58,7 +58,7 @@ public class MyBatisTestDemo {
         student.setENROLLMENTYEAR(date);
 //        studentDao.insertStu(student);
 
-        studentDao.updateStu("jjk","2062810126","物联网工程","女",date,"机电工程学院");
+//        studentDao.updateStu("jjk","2062810126","物联网工程","女",date,"机电工程学院");
 
         List<Map> students = studentDao.selectAll();
         System.out.println(students);
