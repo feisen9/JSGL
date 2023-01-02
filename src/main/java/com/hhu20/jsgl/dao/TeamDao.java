@@ -18,8 +18,8 @@ public class TeamDao {
     public List<Map> selectAll(){
         return teamMapper.selectAll();
     }
-    public void updatePnoandAwardInfo(int teamno, int pno, String awardinfo) throws Exception{
-        teamMapper.updatePnoandAwardInfo(teamno,pno,awardinfo);
+    public int updatePnoandAwardInfo(int teamno, int pno, String awardinfo) throws Exception{
+        return teamMapper.updatePnoandAwardInfo(teamno,pno,awardinfo);
     };
 
     //更新获奖信息审核信息

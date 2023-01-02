@@ -14,36 +14,41 @@ public class AwardDao {
         this.sqlSession = sqlSession;
         awardMapper = sqlSession.getMapper(AwardMapper.class);
     }
-
+    public void commit(){
+        sqlSession.commit();
+    }
 //    public selectAwardInfo(int pno,String cname,String awardInfo,String sno,String sname,String tno,String tname,String awardAuditResult){
 //
 //    }
     //学生上报获奖信息
-    public void addAwardInfo(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo) throws Exception
+    public int addAwardInfo(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo) throws Exception
     {
         //先更新team表中的pno和awardInfo
         TeamDao teamDao = new TeamDao(sqlSession);
-        teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
+        int teamrows = teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
         //更新teammember表中的队员赋分系数
         TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
         teamMemberDao.updateTeamMembers(teamMembers,teamNo);
         //更新advisors表中老师的赋分系数
         AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
         advisorsDao.update(advisors,teamNo);
+        return teamrows;
     }
 
     // 修改获奖信息
-    public void updateAwardInfo(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo) throws Exception
+    public int updateAwardInfo(int teamNo, List<Map> teamMembers,List<Map> advisors,int pno,String awardInfo) throws Exception
     {
+        int rows = 0;
         //先更新team表中的pno和awardInfo
         TeamDao teamDao = new TeamDao(sqlSession);
-        teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
+        rows = teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
         //更新teammember表中的队员赋分系数
         TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
         teamMemberDao.updateTeamMembers(teamMembers,teamNo);
         //更新advisors表中老师的赋分系数
         AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
         advisorsDao.update(advisors,teamNo);
+        return rows;
     }
 
     //审核获奖信息
@@ -55,7 +60,7 @@ public class AwardDao {
         return awardMapper.searchAward(pno, FuzzyQueryStr.bilateralFuzzy(cname), awardInfo, sno, FuzzyQueryStr.bilateralFuzzy(sname), tno, FuzzyQueryStr.bilateralFuzzy(tname), awardAuditResult);
     }
 
-    //获取所有奖金信息
+    //获取所有获奖信息
     public List<Map> getAwardInfo(){
         List<Map> outMap = awardMapper.getAwardInfo();
         TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);

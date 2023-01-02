@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface TeamMapper {
     List<Map> selectAll();
-    void updatePnoandAwardInfo(@Param("teamno") int teamno,@Param("pno") int pno,@Param("awardinfo") String awardinfo);
+    int updatePnoandAwardInfo(@Param("teamno") int teamno,@Param("pno") int pno,@Param("awardinfo") String awardinfo);
     void updateAwardAuditResult(@Param("teamno") String teamNo, @Param("awardAuditResult") String awardAuditResult);
 }
