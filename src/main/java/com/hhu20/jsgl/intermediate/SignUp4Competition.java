@@ -111,10 +111,10 @@ public class SignUp4Competition {
                 Map<String, Object> map = new TreeMap<>();
                 map.put("teamName", team.get("teamname"));
                 map.put("teamNo", team.get("teamno"));
-                map.put("pno", team.get("pno"));
+                map.put("pno", Integer.toString((Integer)team.get("pno")));
                 map.put("cname", team.get("cname"));
                 map.put("regAuditResult", team.get("r_audit_result"));
-                String teamno = (String) team.get("teamno");
+                String teamno = Integer.toString((Integer)team.get("teamno"));
                 map.put("teamMembers",part5.selectTStu(teamno));
                 map.put("advisors",part5.selectTTea(teamno));
                 data.add(map);
@@ -139,7 +139,7 @@ public class SignUp4Competition {
                 Map<String, Object> map = new TreeMap<>();
                 map.put("teamName", team.get("teamname"));
                 map.put("teamNo", team.get("teamno"));
-                map.put("pno", team.get("pno"));
+                map.put("pno", Integer.toString((Integer)team.get("pno")));
                 map.put("cname", team.get("cname"));
                 map.put("regAuditResult", team.get("r_audit_result"));
                 String teamno = Integer.toString((Integer) team.get("teamno"));

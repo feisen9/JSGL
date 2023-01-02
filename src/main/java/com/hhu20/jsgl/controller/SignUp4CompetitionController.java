@@ -69,16 +69,22 @@ public class SignUp4CompetitionController {
         Map<String, Object> outMap = new TreeMap<>();
         String token = tokenMap.get("authorization");
         String userId = tokenUtil.verifyToken(token);
-        if(userId==null){
+        if(userId==null) {
             //token 过期
-            outMap.put("state","5000");
+            outMap.put("state", "5000");
             return outMap;
         }
+
+        for(String k: inMap.keySet()){
+            System.out.println(k+" "+inMap.get(k));
+        }
+
 //        Map<String, Object> data = (Map)inMap.get("data");
         Map<String, Object> data = (Map)inMap;
         String teamName = (String) data.get("teamName");
         String teamNo = Integer.toString((Integer)data.get("teamNo"));
-        String pno = Integer.toString((Integer)data.get("pno"));
+//        String pno = Integer.toString((Integer)data.get("pno"));
+        String pno = (String)data.get("pno");
         List<Map> teamMembers = (List<Map>) data.get("teamMembers");
         List<Map> advisors = (List<Map>) data.get("advisors");
 

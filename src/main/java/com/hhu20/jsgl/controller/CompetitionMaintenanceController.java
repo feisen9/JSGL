@@ -138,6 +138,9 @@ public class CompetitionMaintenanceController {
             outMap.put("state","5000");
             return outMap;
         }
+//        for(String k: inMap.keySet()){
+//            System.out.println(k);
+//        }
         String cno = inMap.get("cno");
         String cname = inMap.get("cname");
         String clevel = inMap.get("clevel");

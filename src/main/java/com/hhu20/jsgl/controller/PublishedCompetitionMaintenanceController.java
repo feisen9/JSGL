@@ -92,7 +92,7 @@ public class PublishedCompetitionMaintenanceController {
             map.put("pperson",rList.get(i).get("pperson"));
             map.put("pyear",rList.get(i).get("pyear"));
             map.put("regCollectTime",rList.get(i).get("r_info_collect_time"));
-            map.put("regdeadline",rList.get(i).get("r_info_deadline"));
+            map.put("regDeadline",rList.get(i).get("r_info_deadline"));
             map.put("awardCollectTime",rList.get(i).get("a_info_collect_time"));
             map.put("awardDeadline",rList.get(i).get("a_info_deadline"));
             map.put("sMaxNum",rList.get(i).get("smaxnum"));
@@ -115,9 +115,9 @@ public class PublishedCompetitionMaintenanceController {
             outMap.put("state","5000");
             return outMap;
         }
-        for(String s: inMap.keySet()){
-            System.out.println(s+" "+inMap.get(s));
-        }
+//        for(String s: inMap.keySet()){
+//            System.out.println(s+" "+inMap.get(s));
+//        }
         String pno = inMap.get("pno");
         String cname = inMap.get("cname");
         String pstate = inMap.get("pstate");
@@ -224,7 +224,7 @@ public class PublishedCompetitionMaintenanceController {
             map.put("pperson",rList.get(i).get("pperson"));
             map.put("pyear",rList.get(i).get("pyear"));
             map.put("regCollectTime",rList.get(i).get("r_info_collect_time"));
-            map.put("regdeadline",rList.get(i).get("r_info_deadline"));
+            map.put("regDeadline",rList.get(i).get("r_info_deadline"));
             map.put("awardCollectTime",rList.get(i).get("a_info_collect_time"));
             map.put("awardDeadline",rList.get(i).get("a_info_deadline"));
             map.put("sMaxNum",rList.get(i).get("smaxnum"));
