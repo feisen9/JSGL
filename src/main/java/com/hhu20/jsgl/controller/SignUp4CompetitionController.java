@@ -74,10 +74,11 @@ public class SignUp4CompetitionController {
             outMap.put("state","5000");
             return outMap;
         }
-        Map<String, Object> data = (Map)inMap.get("data");
+//        Map<String, Object> data = (Map)inMap.get("data");
+        Map<String, Object> data = (Map)inMap;
         String teamName = (String) data.get("teamName");
-        String teamNo = (String) data.get("teamNo");
-        String pno = (String) data.get("pno");
+        String teamNo = Integer.toString((Integer)data.get("teamNo"));
+        String pno = Integer.toString((Integer)data.get("pno"));
         List<Map> teamMembers = (List<Map>) data.get("teamMembers");
         List<Map> advisors = (List<Map>) data.get("advisors");
 
@@ -86,7 +87,7 @@ public class SignUp4CompetitionController {
     }
 
     @RequestMapping(value="auditRegInfo",method=RequestMethod.POST)
-    public Map auditRegInfo(@RequestBody Map<String,String> inMap, @RequestHeader Map<String,String> tokenMap){
+    public Map auditRegInfo(@RequestBody Map<String,Object> inMap, @RequestHeader Map<String,String> tokenMap){
         Map<String, Object> outMap = new TreeMap<>();
         String token = tokenMap.get("authorization");
         String userId = tokenUtil.verifyToken(token);
@@ -95,8 +96,8 @@ public class SignUp4CompetitionController {
             outMap.put("state","5000");
             return outMap;
         }
-        String teamNo = inMap.get("teamNo");
-        String regAuditResult = inMap.get("regAuditResult");
+        String teamNo = Integer.toString((Integer)inMap.get("teamNo"));
+        String regAuditResult = (String) inMap.get("regAuditResult");
 
         SignUp4Competition.updateTeamR(teamNo,regAuditResult);
         outMap.put("state","200");
