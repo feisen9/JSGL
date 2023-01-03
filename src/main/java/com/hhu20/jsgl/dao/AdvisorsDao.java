@@ -38,8 +38,8 @@ public class AdvisorsDao {
         //改变键名与前端对应
         for(int i=0;i<outMap.size();i++){
             float sofficient = (float) outMap.get(i).get("tcoefficient");
-            outMap.get(0).remove("tcoefficient");
-            outMap.get(0).put("sofficient",sofficient);
+            outMap.get(i).remove("tcoefficient");
+            outMap.get(i).put("sofficient",sofficient);
         }
         return outMap;
     }

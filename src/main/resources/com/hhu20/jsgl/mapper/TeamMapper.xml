@@ -17,11 +17,11 @@
         set
             pno=#{pno},
             awardinfo=#{awardinfo}
-        where teamno=#{teamno} and A_AUDIT_RESULT='待审核';
+        where teamno=#{teamno}; -- and A_AUDIT_RESULT='待审核';
     </update>
     <update id="updateAwardAuditResult">
         update team set
-                        a_audit_result = #{awardAuditResult}
+                        a_audit_result= #{awardAuditResult}
         where teamno = #{teamno}
     </update>
 
