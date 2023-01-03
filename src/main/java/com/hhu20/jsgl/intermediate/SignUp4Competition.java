@@ -219,7 +219,7 @@ public class SignUp4Competition {
             }
             for(Map tea: advisors){
                 String tno = (String) tea.get("tno");
-                part5.teammemberInsert(tno,teamno);
+                part5.advisorInsert(tno,teamno);
             }
 
             sqlSession.close();
