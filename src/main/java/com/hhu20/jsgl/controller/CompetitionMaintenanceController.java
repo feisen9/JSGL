@@ -2,6 +2,7 @@ package com.hhu20.jsgl.controller;
 
 import com.hhu20.jsgl.intermediate.CompetitionMaintenance;
 import com.hhu20.jsgl.util.TokenUtil;
+import com.mysql.cj.jdbc.SuspendableXAConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,8 +80,9 @@ public class CompetitionMaintenanceController {
         String organizer = inMap.get("organizer");
         String hostinstitue = inMap.get("hostinstitue");
 
-        List<Map> test = CompetitionMaintenance.select(null,cname,null,null,null);
-        if(test.size()!=1){
+        List<Map> test = CompetitionMaintenance.select(null,cname,clevel,organizer,hostinstitue);
+//        System.out.println(test.size());
+        if(test.size()!=0){
             outMap.put("state","4001");
             return outMap;
         }
