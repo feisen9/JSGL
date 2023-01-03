@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface TeamMemberMapper {
-    void updateTeammembers(@Param("scofficient") float scofficient, @Param("sno") String sno, @Param(("teamno")) Integer teamno);
+    void updateTeammembers(@Param("scofficient") double scofficient, @Param("sno") String sno, @Param(("teamno")) Integer teamno);
     List<Map> selectByTeamno(@Param("teamno") int teamno);
 }

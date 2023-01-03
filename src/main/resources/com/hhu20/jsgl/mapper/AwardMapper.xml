@@ -5,14 +5,15 @@
 <!-- namespace 命名空间 -->
 <mapper namespace="com.hhu20.jsgl.mapper.AwardMapper">
     <update id="deleteAwardInfo">
-        update team set awardinfo = null where teamno=#{teamno};
+        update team set awardinfo = null, a_audit_result=null where teamno=#{teamno};
     </update>
 
 
     <select id="searchAward" resultType="java.util.Map">
-        select teamno,pno,awardinfo
-        from team
-        where 1=1
+        select teamno,teamname,cname,pno,awardinfo,a_audit_result
+        from team_publishedcompetion natural join competition
+        where awardinfo is not null and a_audit_result is not null
+        and awardinfo != '' and a_audit_result != ''
         <if test="pno != null and pno != ''">
             and pno=#{pno}
         </if>
@@ -24,40 +25,36 @@
         </if>
         <if test="cname != null and cname != ''">
 #           模糊查询
-            and exists (
-                select *
-                from team_publishedcompetion natural join competition
-                where teamno = team.teamno and cname like #{cname}
-            )
+            and cname like CONCAT(CONCAT('%', #{cname}), '%')
         </if>
         <if test="sno != null and sno != ''">
             and EXISTS (
                 select *
                 FROM teammember
-                where teammember.teamno = team.teamno and teammember.sno = #{sno})
+                where teammember.teamno = team_publishedcompetion.teamno and teammember.sno = #{sno})
         </if>
         <if test="sname != null and sname != ''">
 #           模糊查询
             and EXISTS (
                 select *
-                from teammember natural join student
-                where teamno = team.teamno and sname like #{sname}
+                from teammember_stu
+                where teamno = team_publishedcompetion.teamno and sname like CONCAT(CONCAT('%', #{sname}), '%')
                 )
         </if>
         <if test="tno != null and tno != ''">
-            and EXISTS (select * FROM advisors where advisors.teamno = team.teamno and advisors.tno = #{tno})
+            and EXISTS (select * FROM advisors where advisors.teamno = team_publishedcompetion.teamno and advisors.tno = #{tno})
         </if>
         <if test="tname != null and tname != ''">
 #             模糊查询
             and EXISTS (
                 select *
-                from advisors natural join teacher
-                where teamno = team.teamno and tname like #{tname}
+                from advisors_tea
+                where teamno = team_publishedcompetion.teamno and tname like CONCAT(CONCAT('%', #{tname}), '%')
             )
         </if>
 
     </select>
     <select id="getAwardInfo" resultType="java.util.Map">
-        select teamno,pno,awardinfo from team;
+        select teamno,pno,awardinfo,a_audit_result from team;
     </select>
 </mapper>

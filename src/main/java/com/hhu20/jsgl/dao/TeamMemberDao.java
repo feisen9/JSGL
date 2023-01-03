@@ -16,7 +16,8 @@ public class TeamMemberDao {
     }
     public void updateTeamMembers(List<Map> teamMembers,Integer teamNo) throws Exception{       //更新队员
         for(Map teamMember : teamMembers){
-            teamMemberMapper.updateTeammembers((Float) teamMember.get("sofficient"), (String) teamMember.get("sno"),teamNo);
+            teamMember.put("sofficient",Double.parseDouble(teamMember.get("sofficient").toString()));
+            teamMemberMapper.updateTeammembers((Double) teamMember.get("sofficient"), (String) teamMember.get("sno"),teamNo);
         }
     }
     public List<Map> selectByTeamno(int teamno){
@@ -24,8 +25,8 @@ public class TeamMemberDao {
         //改变键名与前端对应
         for(int i=0;i<outMap.size();i++){
             float sofficient = (float) outMap.get(i).get("scofficient");
-            outMap.get(0).remove("scofficient");
-            outMap.get(0).put("sofficient",sofficient);
+            outMap.get(i).remove("scofficient");
+            outMap.get(i).put("sofficient",sofficient);
         }
         return outMap;
 

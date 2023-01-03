@@ -12,23 +12,31 @@
         select * from stu_bonus_result;
     </select>
 
-    <select id="searchBonus" resultType="java.util.Map">
+<!--    <select id="searchBonus" resultType="java.util.Map">-->
+<!--        -->
+<!--        -->
+<!--    </select>-->
+    <select id="searchStuBonus" resultType="java.util.Map">
+        select sno as userId,  pno, teamno as teamNo, cname, clevel, bonusAmount
+        from stu_bonus_result
+        where 1=1
         <if test="sno != null and sno != ''">
-            select sno as userId, pno, teamno as teamNo, cname, clevel, bonusAmount
-            from stu_bonus_result
-            where sno = #{sno}
-            <if test="pno != null">
-                and pno = #{pno}
-            </if>
-        </if>;
+            and sno = #{sno}
+        </if>
+        <if test="pno != null">
+            and pno = #{pno}
+        </if>
+    </select>
+    <select id="searchTeaBonus" resultType="java.util.Map">
+        select tno as userId, pno, teamno as teamNo, cname, clevel, bonusAmount
+        from tea_bonus_result
+        where 1=1
         <if test="tno != null and tno != ''">
-            select tno as userId, pno, teamno as teamNo, cname, clevel, bonusAmount
-            from tea_bonus_result
-            where tno = #{tno}
-            <if test="pno != null">
-                and pno = #{pno}
-            </if>
-        </if>;
+            and tno = #{tno}
+        </if>
+        <if test="pno != null">
+            and pno = #{pno}
+        </if>
     </select>
 
 

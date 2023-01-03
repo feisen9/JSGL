@@ -27,7 +27,7 @@ public class AwardDao {
     {
         //先更新team表中的pno和awardInfo
         TeamDao teamDao = new TeamDao(sqlSession);
-        int teamrows = teamDao.updatePnoandAwardInfo(teamNo,pno,awardInfo);
+        int teamrows = teamDao.addPnoandAwardInfo(teamNo,pno,awardInfo);
         //更新teammember表中的队员赋分系数
         TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
         teamMemberDao.updateTeamMembers(teamMembers,teamNo);
@@ -61,7 +61,7 @@ public class AwardDao {
     public List<Map> searchAward(Integer pno,String cname,String awardInfo,String sno,String sname,String tno,String tname,String awardAuditResult){
         TeamMemberDao teamMemberDao = new TeamMemberDao(sqlSession);
         AdvisorsDao advisorsDao = new AdvisorsDao(sqlSession);
-        List<Map> result = awardMapper.searchAward(pno, FuzzyQueryStr.bilateralFuzzy(cname), awardInfo, sno, FuzzyQueryStr.bilateralFuzzy(sname), tno, FuzzyQueryStr.bilateralFuzzy(tname), awardAuditResult);
+        List<Map> result = awardMapper.searchAward(pno, cname, awardInfo, sno, sname, tno, tname, awardAuditResult);
         List<Map> outMap = new ArrayList<>();
         for(int i=0;i<result.size();i++){
             Map temp = result.get(i);
@@ -71,8 +71,11 @@ public class AwardDao {
             List<Map> advisors = advisorsDao.selectByTeamno((Integer) temp.get("teamno"));
             newmap.put("advisors",advisors);
             newmap.put("teamNo",temp.get("teamno"));
+            newmap.put("teamName",temp.get("teamname"));
+            newmap.put("cname",temp.get("cname"));
             newmap.put("pno", temp.get("pno"));
             newmap.put("awardInfo", temp.get("awardinfo"));
+            newmap.put("awardAuditResult", temp.get("a_audit_result"));
             outMap.add(newmap);
         }
         return outMap;

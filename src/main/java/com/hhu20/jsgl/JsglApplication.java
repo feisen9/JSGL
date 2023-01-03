@@ -4,13 +4,20 @@ import com.hhu20.jsgl.intermediate.UserMaintenance;
 import com.hhu20.jsgl.pojo.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
-public class JsglApplication {
+public class JsglApplication extends SpringBootServletInitializer {
+
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder springApplicationBuilder){
+//        return springApplicationBuilder.sources(JsglApplication.class);
+//    }
 
     public static void main(String[] args) {
         test();

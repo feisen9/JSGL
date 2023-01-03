@@ -27,22 +27,22 @@ public class CompetitionAwardsController {
         }
 
 
-        Map<String,Object> data = (Map)inMap.get("data");
-        String teamNostr = (String) data.get("pno");
+        
+        String teamNostr = inMap.get("pno").toString();
         Integer teamNo = null;
         if(!teamNostr.equals("")){
             teamNo = Integer.valueOf(teamNostr);
         }
 
-        String pnostr = (String) data.get("pno");
+        String pnostr = (String) inMap.get("pno");
         Integer pno = null;
         if(!pnostr.equals("")){
             pno = Integer.valueOf(pnostr);
         }
 
-        List<Map> teamMembers = (List<Map>) data.get("teamMembers");
-        List<Map> advisors = (List<Map>) data.get("advisors");
-        String awardInfo = (String) data.get("awardInfo");
+        List<Map> teamMembers = (List<Map>) inMap.get("teamMembers");
+        List<Map> advisors = (List<Map>) inMap.get("advisors");
+        String awardInfo = (String) inMap.get("awardInfo");
 
 
         int rows = Award.add(teamNo,teamMembers,advisors,pno,awardInfo);
@@ -65,21 +65,21 @@ public class CompetitionAwardsController {
             return outMap;
         }
 
-        Map<String,Object> data = (Map)inMap.get("data");
-        String teamNostr = (String) data.get("pno");
+//        Map<String,Object> data = (Map)inMap.get("data");
+        String teamNostr = inMap.get("teamNo").toString();
         Integer teamNo = null;
         if(!teamNostr.equals("")){
             teamNo = Integer.valueOf(teamNostr);
         }
 
-        String pnostr = (String) data.get("pno");
+        String pnostr = inMap.get("pno").toString();
         Integer pno = null;
         if(!pnostr.equals("")){
             pno = Integer.valueOf(pnostr);
         }
-        List<Map> teamMembers = (List<Map>) data.get("teamMembers");
-        List<Map> advisors = (List<Map>) data.get("advisors");
-        String awardInfo = (String) data.get("awardInfo");
+        List<Map> teamMembers = (List<Map>) inMap.get("teamMembers");
+        List<Map> advisors = (List<Map>) inMap.get("advisors");
+        String awardInfo = (String) inMap.get("awardInfo");
         int rows = Award.update(teamNo,teamMembers,advisors,pno,awardInfo);
         if(rows == 1)
             outMap.put("state","200");
@@ -121,7 +121,7 @@ public class CompetitionAwardsController {
         }
 
 
-        String pnostr = (String) inMap.get("pno");
+        String pnostr = inMap.get("pno").toString();
         Integer pno = null;
         if(!pnostr.equals("")){
             pno = Integer.valueOf(pnostr);
@@ -152,14 +152,15 @@ public class CompetitionAwardsController {
             return outMap;
         }
 
-        String pnostr = inMap.get("pno");
+        String pnostr = inMap.get("pno").toString();
         Integer pno = null;
         if(!pnostr.equals("")){
             pno = Integer.valueOf(pnostr);
         }
         String sno = inMap.get("sno");
         String tno = inMap.get("tno");
-        List<Map> result = Bonus.searchBonus(sno,tno,pno);
+        String usertype = inMap.get("usertype");
+        List<Map> result = Bonus.searchBonus(sno,tno,pno,usertype);
         outMap.put("state","200");
         outMap.put("data",result);
         return outMap;
@@ -230,7 +231,7 @@ public class CompetitionAwardsController {
         }
 
 //        int teamNo = Integer.parseInt(inMap.get("teamNo"));
-        String teamNostr = (String) inMap.get("pno");
+        String teamNostr = inMap.get("teamNO").toString();
         Integer teamNo = null;
         if(!teamNostr.equals("")){
             teamNo = Integer.valueOf(teamNostr);

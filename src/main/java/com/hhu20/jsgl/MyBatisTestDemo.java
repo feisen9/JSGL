@@ -87,5 +87,11 @@ public class MyBatisTestDemo {
         System.out.println("结果");
         System.out.println(Integer.valueOf("123"));
 
+
+        Integer integer1 = 1;
+        Double double1 = Double.parseDouble(integer1.toString());
+        System.out.println(double1 instanceof Double);
+//        System.out.println(integer1.doubleValue() instanceof Double);
+
     }
 }

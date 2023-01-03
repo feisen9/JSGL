@@ -4,16 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 命名空间 -->
 <mapper namespace="com.hhu20.jsgl.mapper.TeamMapper">
+    <update id="addPnoandAwardInfo">
+        update team
+        set
+            pno=#{pno},
+            awardinfo=#{awardinfo},
+            A_AUDIT_RESULT='待审核'
+        where teamno=#{teamno};
+    </update>
     <update id="updatePnoandAwardInfo">
         update team
         set
             pno=#{pno},
             awardinfo=#{awardinfo}
-        where teamno=#{teamno};
+        where teamno=#{teamno} and A_AUDIT_RESULT='待审核';
     </update>
     <update id="updateAwardAuditResult">
         update team set
-                        R_AUDIT_RESULT = #{awardAuditResult}
+                        a_audit_result = #{awardAuditResult}
         where teamno = #{teamno}
     </update>
 

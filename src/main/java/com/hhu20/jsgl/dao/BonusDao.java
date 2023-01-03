@@ -23,8 +23,14 @@ public class BonusDao {
         return bonusMapper.selectAllStuBonus();
     }
 
-    public List<Map> searchBonus(String sno,String tno,Integer pno){
-        return bonusMapper.searchBonus(sno, tno, pno);
+    public List<Map> searchBonus(String sno,String tno,Integer pno,String usertype){
+        if(usertype.equals("stu")){
+            return bonusMapper.searchStuBonus(sno, pno);
+        }
+        else{
+            return bonusMapper.searchTeaBonus(tno, pno);
+        }
+
     }
 
 }

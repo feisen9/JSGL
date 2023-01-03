@@ -12,6 +12,8 @@
     <artifactId>JSGL</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>JSGL</name>
+<!--    转换为war包打包-->
+<!--    <packaging>war</packaging>-->
     <description>JSGL</description>
     <properties>
         <java.version>17</java.version>
@@ -97,6 +99,12 @@
             <scope>test</scope>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -105,6 +113,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-war-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <warName>ROOT</warName>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

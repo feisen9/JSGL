@@ -85,16 +85,17 @@ public class Award {
             SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
             AwardDao awardDao = new AwardDao(sqlSession);
-            List<Map> results = awardDao.getAwardInfo();
-            for(Map result:results){
-                Map<String, Object> map = new TreeMap<>();
-                map.put("teamNo",result.get("teamno"));
-                map.put("teamMembers",result.get("teamMembers"));
-                map.put("advisors",result.get("advisors"));
-                map.put("pno",result.get("pno"));
-                map.put("awardInfo",result.get("awardinfo"));
-                data.add(map);
-            }
+            data = awardDao.searchAward(null,null,null,null,null,null,null,null);
+//            for(Map result:results){
+//                Map<String, Object> map = new TreeMap<>();
+//                map.put("teamNo",result.get("teamno"));
+//                map.put("teamMembers",result.get("teamMembers"));
+//                map.put("advisors",result.get("advisors"));
+//                map.put("pno",result.get("pno"));
+//                map.put("awardInfo",result.get("awardinfo"));
+//                map.put("awardAuditResult",result.get("a_audit_result"));
+//                data.add(map);
+//            }
             sqlSession.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

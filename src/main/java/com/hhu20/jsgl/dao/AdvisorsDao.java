@@ -26,7 +26,11 @@ public class AdvisorsDao {
     }
     public void update(List<Map> advisors, Integer teamno) throws Exception{
         for (Map advisor:advisors){
-            advisorsMapper.update((Float) advisor.get("soefficient"), (String) advisor.get("tno"),teamno);
+//            System.out.println(advisor.get("sofficient"));
+//            System.out.println(advisor.get("tno"));
+//            Double sofficient = (Double)
+            advisor.put("sofficient",Double.parseDouble(advisor.get("sofficient").toString()));
+            advisorsMapper.update((Double) advisor.get("sofficient"), (String) advisor.get("tno"),teamno);
         }
     }
     public List<Map> selectByTeamno(int teamno){ //根据teamno查tno,tname,tcoefficient

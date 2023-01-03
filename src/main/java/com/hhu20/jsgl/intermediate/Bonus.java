@@ -66,13 +66,13 @@ public class Bonus {
         return data;
     }
 
-    public static List<Map> searchBonus(String sno,String tno,Integer pno){
+    public static List<Map> searchBonus(String sno,String tno,Integer pno,String usertype){
         List<Map> data = null;
         try{
             SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
             BonusDao bonusDao = new BonusDao(sqlSession);
-            data = bonusDao.searchBonus(sno,tno,pno);
+            data = bonusDao.searchBonus(sno,tno,pno,usertype);
             sqlSession.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

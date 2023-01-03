@@ -21,6 +21,9 @@ public class TeamDao {
     public int updatePnoandAwardInfo(Integer teamno, Integer pno, String awardinfo) throws Exception{
         return teamMapper.updatePnoandAwardInfo(teamno,pno,awardinfo);
     };
+    public int addPnoandAwardInfo (Integer teamno, Integer pno, String awardinfo) throws Exception {
+        return teamMapper.addPnoandAwardInfo(teamno,pno,awardinfo);
+    }
 
     //更新获奖信息审核信息
     public int updateAwardAuditResult(String teamNo, String awardAuditResult) throws Exception{
