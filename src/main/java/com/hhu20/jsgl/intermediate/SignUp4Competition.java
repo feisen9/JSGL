@@ -64,7 +64,7 @@ public class SignUp4Competition {
             }
             for(Map tea: advisors){
                 String tno = (String) tea.get("tno");
-                part5.teammemberInsert(tno,teamNo);
+                part5.advisorInsert(tno,teamNo);
             }
 
             sqlSession.close();
