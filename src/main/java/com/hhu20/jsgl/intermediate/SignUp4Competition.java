@@ -192,7 +192,7 @@ public class SignUp4Competition {
                     outMap.put("state","4003");
                     return outMap;
                 }
-                if(!rList.get(0).get("sname").equals(tname)){
+                if(!rList.get(0).get("tname").equals(tname)){
                     System.out.println("指导老师信息有误");
                     sqlSession.close();
                     outMap.put("state","4003");
