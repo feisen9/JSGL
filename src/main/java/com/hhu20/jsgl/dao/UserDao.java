@@ -34,6 +34,10 @@ public class UserDao {
         return userMapper.selectUserId(FuzzyQueryStr.unilateralFuzzy(userId));
     }
 
-    public void add(User user){userMapper.add(user);}
+//    public void add(User user){userMapper.add(user);}
+
+    public void add(String userId, String password, String userType, String userName) {
+        userMapper.add(userId,userName,userType,userName);
+    }
 
 }
