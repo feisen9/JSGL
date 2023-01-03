@@ -37,6 +37,8 @@ public class SignUp4CompetitionController {
         List<Map> teamMembers = (List<Map>) data.get("teamMembers");
         List<Map> advisors = (List<Map>) data.get("advisors");
 
+        System.out.println("reg");
+
         Map<String,String> result = SignUp4Competition.teamInsert(teamName,pno,teamMembers,advisors);
         if(!result.get("state").equals("200")){
             return result;
@@ -142,6 +144,9 @@ public class SignUp4CompetitionController {
             //token 过期
             outMap.put("state","5000");
             return outMap;
+        }
+        for(String s: inMap.keySet()){
+            System.out.println(s+" "+inMap.get(s));
         }
 //        Map<String, Object> data = (Map)inMap.get("data");
         Map<String, Object> data = inMap;

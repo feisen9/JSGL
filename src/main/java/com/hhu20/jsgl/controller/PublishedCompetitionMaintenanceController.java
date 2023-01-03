@@ -218,7 +218,7 @@ public class PublishedCompetitionMaintenanceController {
         List<Map<String,Object>> data = new ArrayList<Map<String,Object>>();
         for(int i = 0; i < rList.size(); i += 1){
             Map<String,Object> map = new TreeMap<>();
-            map.put("pno",rList.get(i).get("pno"));
+            map.put("pno",Integer.toString((Integer)rList.get(i).get("pno")));
             map.put("cname",rList.get(i).get("cname"));
             map.put("pstate",rList.get(i).get("pstate"));
             map.put("pperson",rList.get(i).get("pperson"));
