@@ -13,7 +13,7 @@ public class SignUp4Competition {
     public static Map update(String teamNo, String teamname, String pno, List<Map> teamMembers, List<Map> advisors){
         Map<String, String> outMap = new TreeMap<>();
         try {
-            SqlSessionTool sqlSessionTool = new SqlSessionTool();
+            SqlSessionTool sqlSessionTool = new SqlSessionTool(false);
             SqlSession sqlSession = sqlSessionTool.getSqlSession();
             Part5 part5 = new Part5(sqlSession);
             TeacherDao teacherDao = new TeacherDao(sqlSession);
@@ -66,7 +66,9 @@ public class SignUp4Competition {
                 String tno = (String) tea.get("tno");
                 part5.advisorInsert(tno,teamNo);
             }
-
+            AwardDao awardDao = new AwardDao(sqlSession);
+            awardDao.deleteAwardInfo(Integer.valueOf(teamNo));
+            sqlSession.commit();
             sqlSession.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
