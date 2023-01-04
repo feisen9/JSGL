@@ -32,7 +32,7 @@ public class TokenUtil {
             return null;
         }
         cache.del(token);
-        cache.set(token,aToken,600);
+        cache.set(token,aToken,6000);
         return userId;
     }
 
@@ -51,7 +51,7 @@ public class TokenUtil {
             accessToken = authorizationService.createAccessIdToken(userId);
             refreshToken = authorizationService.createRefreshIdToken(userId);
             cache.del(accessToken);
-            cache.set(accessToken,refreshToken,600);//存储,600s
+            cache.set(accessToken,refreshToken,6000);//存储,600s
             outMap.put("userId",userId);
             outMap.put("Authorization",accessToken);
             return outMap;
@@ -68,8 +68,8 @@ public class TokenUtil {
         if(accessToken==null||refreshToken==null){
             return null;
         }
-        cache.set(accessToken,refreshToken,600);//存储,600s
-        cache.set(token,accessToken,600);
+        cache.set(accessToken,refreshToken,6000);//存储,600s
+        cache.set(token,accessToken,6000);
         return token;
     }
 
