@@ -28,7 +28,7 @@ public class CompetitionAwardsController {
 
 
         
-        String teamNostr = inMap.get("pno").toString();
+        String teamNostr = inMap.get("teamNo").toString();
         Integer teamNo = null;
         if(!teamNostr.equals("")){
             teamNo = Integer.valueOf(teamNostr);
